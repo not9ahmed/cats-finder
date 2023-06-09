@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: env.properties
+  datasource:
+    username: DB_USER
+    password: DB_PASSWORD
+    url: DB_URL
+  sql:
+    init:
+      mode: always
+
+logging:
+  level.org.springframework.jdbc=DEBUG
