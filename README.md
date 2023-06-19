@@ -12,8 +12,11 @@ The users will be able to post their cats and share cute pics of their cats.
 
 
 ## Routes
-| Endpoint | HTTP Method | response                      |
-|----------|-------------|-------------------------------|
-| `/`      | GET         | Get Home Page                 |
-| `/users` | GET         | responds with users home page |
-| `/cats`  | GET         | responds withs all cats       |
+| Endpoint         | HTTP Method | response                                            |
+|------------------|-------------|-----------------------------------------------------|
+| `/`              | GET         | Get Home Page                                       |
+| `/users`         | GET         | responds with users home page                       |
+| `/users/id`      | PUT         | updates the user details responds with updated user |
+| `/cats`          | GET         | responds withs all cats                             |
+| `/users/id/cats` | GET         | responds with the users cats                        |
+
