@@ -2,18 +2,21 @@
 GET http://localhost:8080/api/users
 
 
+### Get one user with id 4
+GET http://localhost:8080/api/users/5
+
 
 ### Create a new user
 POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-  "username": "notahmed",
+  "username": "ann_sordo",
   "password": "12341234",
-  "first_name": "Ahmed",
-  "last_name": "Al-Thawadi",
+  "first_name": "Ann",
+  "last_name": "Sordo",
   "mobile": "12341234",
-  "gender": "M",
+  "gender": "F",
   "birth_date": "1999-09-03T22:21:09.264528",
   "details_updated": "2023-06-21T22:21:09.264528",
   "user_role": "A",

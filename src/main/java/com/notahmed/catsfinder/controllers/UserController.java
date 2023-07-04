@@ -4,10 +4,10 @@ import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,13 +35,35 @@ public class UserController {
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Long id){
+
+//        return (User) repository.findById(id).orElse();
+
+        return (User) repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
 
     //Create a new user
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public void create(@Valid @RequestBody User user){
 
+
+        //check if the user exists first
+        if (repository.existsByUsername(user.username())) {
+            System.out.println("user already exists");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "user already exists");
+        }
+
+
+        System.out.println("User created");
         repository.save(user);
+
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+
+
     }
 
 
@@ -59,7 +81,7 @@ public class UserController {
 
     }
 
-    // delete use
+    // delete user
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){

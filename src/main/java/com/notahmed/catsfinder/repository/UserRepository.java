@@ -5,4 +5,9 @@ import org.springframework.data.repository.ListCrudRepository;
 
 public interface UserRepository extends ListCrudRepository<User, Long> {
 
+
+    User findUserByUsername(String username);
+
+    Boolean existsByUsername(String username);
+
 }

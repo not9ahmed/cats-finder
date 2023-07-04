@@ -1,0 +1,34 @@
+### Get all breeds
+GET http://localhost:8080/api/breeds
+
+
+### Get cat by id
+GET http://localhost:8080/api/breeds/1
+
+
+### Create new breeds
+POST http://localhost:8080/api/breeds
+Content-Type: application/json
+
+{
+  "name": "Persian Cat",
+  "description": "Very fluffy type of cat",
+  "images": ["", ""]
+}
+
+
+### Update existing breed
+PUT http://localhost:8080/api/breeds/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "updated",
+  "description": "Squashy rat toy",
+  "images": ["", ""]
+}
+
+
+
+### Delete existing breed
+DELETE http://localhost:8080/api/breeds/4
