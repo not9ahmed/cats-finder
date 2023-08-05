@@ -1,10 +1,11 @@
 package com.notahmed.catsfinder.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,9 +22,11 @@ public record Cat (
 //        AggregateReference <User, Long> owner_id,
 
 
-        Integer breed_id,
+//        Long breed_id,
+        AggregateReference<Breed, Long> breed_id,
 
-        Integer owner_id,
+//        Long owner_id,
+        AggregateReference<User, Long> owner_id,
 
         Date birth_date,
         ArrayList<String> images,

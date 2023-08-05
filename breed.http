@@ -11,8 +11,8 @@ POST http://localhost:8080/api/breeds
 Content-Type: application/json
 
 {
-  "name": "Persian Cat",
-  "description": "Very fluffy type of cat",
+  "name": "Himalayan Cat",
+  "description": "Very chill cat",
   "images": ["", ""]
 }
 
