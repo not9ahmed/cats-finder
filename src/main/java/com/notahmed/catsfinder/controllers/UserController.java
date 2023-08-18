@@ -1,5 +1,6 @@
 package com.notahmed.catsfinder.controllers;
 
+import com.notahmed.catsfinder.dto.UserRequestDto;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -30,18 +32,45 @@ public class UserController {
 
     // user home controller where it will get all user
     @GetMapping("")
-    public List<User> findAll(){
+    public List<UserRequestDto> findAll(){
 
-        return repository.findAll();
+        List<User> usersList = repository.findAll();
+
+        List<UserRequestDto> usersListFiltered  = usersList.stream().map(user -> new UserRequestDto(
+                user.id(),
+                user.username(),
+                user.first_name(),
+                user.last_name(),
+                user.gender(),
+                user.birth_date(),
+                user.profile_image()
+        )).collect(Collectors.toList());
+
+        return usersListFiltered;
     }
 
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id){
+    public UserRequestDto findById(@PathVariable Long id){
 
+        System.out.println("find by id");
 //        return (User) repository.findById(id).orElse();
 
-        return (User) repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        User userDb = repository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")
+        );
+
+        UserRequestDto user = new UserRequestDto(
+                userDb.id(),
+                userDb.username(),
+                userDb.first_name(),
+                userDb.last_name(),
+                userDb.gender(),
+                userDb.birth_date(),
+                userDb.profile_image()
+        );
+
+        return user;
     }
 
 

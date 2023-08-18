@@ -3,7 +3,7 @@ GET http://localhost:8080/api/users
 
 
 ### Get one user with id 4
-GET http://localhost:8080/api/users/5
+GET http://localhost:8080/api/users/8
 
 
 ### Create a new user

@@ -1,6 +1,7 @@
 package com.notahmed.catsfinder.controllers;
 
 import com.notahmed.catsfinder.dto.CatDetails;
+import com.notahmed.catsfinder.dto.CatDetailslNew;
 import com.notahmed.catsfinder.models.Breed;
 import com.notahmed.catsfinder.models.Cat;
 import com.notahmed.catsfinder.models.User;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cats")
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CatController {
 
     // Add Spring Data JDBC Repository which is CatRepository which is by default contains all the crud function
-    private final CatRepository repository;
+    private final CatRepository catRepository;
 
     // using the other repos
     private final UserRepository userRepository;
@@ -31,8 +31,8 @@ public class CatController {
 
 
     // Dependency Injection of the repository here with constructor
-    public CatController(CatRepository repository, UserRepository userRepository, BreedRepository breedRepository) {
-        this.repository = repository;
+    public CatController(CatRepository catRepository, UserRepository userRepository, BreedRepository breedRepository) {
+        this.catRepository = catRepository;
         this.userRepository = userRepository;
         this.breedRepository = breedRepository;
     }
@@ -60,9 +60,9 @@ public class CatController {
 //
 //        System.out.println(hazel.toString());
 
-        repository.findAll().stream().forEach(System.out::println);
+        catRepository.findAll().stream().forEach(System.out::println);
 
-        return repository.findAll();
+        return catRepository.findAll();
 
 
 //        return repository.findAll();
@@ -72,25 +72,35 @@ public class CatController {
     @GetMapping("/details")
     public List<CatDetails> findAllCatsWithDetails(){
 
-        List<Cat> cats = repository.findAll();
+        List<Cat> cats = catRepository.findAll();
 
         List<CatDetails> catsDetails = new ArrayList<>();
 
+
+        // move it to mapper class
         for(Cat cat: cats){
-            Long breed_id = cat.breed_id().getId();
-            Long owner_id = cat.owner_id().getId();
-
-            Breed breed = breedRepository.findById(breed_id.longValue()).orElse(null);
-            User user = userRepository.findById(owner_id.longValue()).orElse(null);
-
-
-            CatDetails singleCatDetails = new CatDetails(cat, breed, user);
+//            Long breed_id = cat.breedId().getId();
+//            Long owner_id = cat.ownerId().getId();
+//
+//            Breed breed = breedRepository.findById(breed_id.longValue()).orElse(null);
+//            User user = userRepository.findById(owner_id.longValue()).orElse(null);
 
 
-            catsDetails.add(singleCatDetails);
+//            CatDetails singleCatDetails = new CatDetails(
+//                    cat.id(),
+//                    cat.name(),
+//                    breed,
+//                    user,
+//                    cat.birth_date(),
+//                    cat.images(),
+//                    cat.toys()
+//            );
 
 
-            System.out.println(singleCatDetails);
+//            catsDetails.add(singleCatDetails);
+//
+//
+//            System.out.println(singleCatDetails);
         }
 
 
@@ -105,7 +115,7 @@ public class CatController {
     public Cat findById(@PathVariable Long id){
 
 
-        return (Cat) repository.findById(id)
+        return (Cat) catRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cat Not Found"));
 
 
@@ -114,7 +124,16 @@ public class CatController {
 
 
 
-    // Get many cats of type
+    // Get user cats
+    @GetMapping("/users/{id}")
+    public List<Cat> findUserCats(@PathVariable Long id){
+
+
+        return catRepository.findAllByOwnerId(id);
+
+    }
+
+
 
 
 
@@ -191,18 +210,25 @@ public class CatController {
 //        }
 
 
+//        AggregateReference<Breed, Long> breedID= AggregateReference.to(cat.breedId().getId());
+//        AggregateReference<User, Long> userID= AggregateReference.to(cat.ownerId().getId());
 
-        repository.save(new Cat(
-                null,
-                cat.name(),
-                cat.breed_id(),
-                cat.owner_id(),
-                cat.birth_date(),
-                cat.images(),
-                cat.toys()
-        ));
 
-        repository.save(cat);
+//        System.out.println("breedID " + breedID);
+//        System.out.println("userID " + userID);
+
+
+//        catRepository.save(new Cat(
+//                null,
+//                cat.name(),
+//                breedID,
+//                userID,
+//                cat.birth_date(),
+//                cat.images(),
+//                cat.toys()
+//        ));
+
+        catRepository.save(cat);
 
     }
 
@@ -213,11 +239,11 @@ public class CatController {
     public void update(@RequestBody Cat cat, @PathVariable Long id){
 
         //first check if the cat id exists or not
-        if(!repository.existsById(id)){
+        if(!catRepository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cat not found");
         }
 
-        repository.save(cat);
+        catRepository.save(cat);
 
     }
 
@@ -229,19 +255,53 @@ public class CatController {
     public void delete(@PathVariable Long id){
 
         //check if the id exists
-        if(!repository.existsById(id)){
+        if(!catRepository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cat not found");
         }
 
-        repository.deleteById(id);
+        catRepository.deleteById(id);
 
     }
 
 
 
+    @GetMapping("/agg/all")
+    public Iterable findAggAll(){
+        return catRepository.findAll();
+    }
+
+
+    @GetMapping("/agg/{id}")
+    public Cat findAggById(@PathVariable Long id){
+
+        return catRepository.findById(id).orElse(null);
+    }
 
 
 
+    @GetMapping("/agg/{id}/details")
+    public CatDetails findAggByIdDetails(@PathVariable Long id){
+
+        Cat cat = catRepository.findById(id).orElse(null);
+
+        CatDetails singleCatDetails = new CatDetails(
+                cat.getId(),
+                cat.getName(),
+                breedRepository.findById(cat.getBreedId().getId()).get(),
+                userRepository.findById(cat.getOwnerId().getId()).get(),
+                cat.getBirth_date(),
+                cat.getImages(),
+                cat.getToys()
+        );
+
+        return singleCatDetails;
+
+//        return new CatDetailslNew(
+//                cat,
+//                userRepository.findById(cat.getOwnerId().getId()).get(),
+//                breedRepository.findById(cat.getBreedId().getId()).get()
+//        );
+    }
 }
 
 

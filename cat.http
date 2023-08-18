@@ -1,11 +1,30 @@
 ### Get all cats
 GET http://localhost:8080/api/cats
 
-### Get all cats
+
+### Get all cats with details
 GET http://localhost:8080/api/cats/details
+
 
 ### Get cat by id
 GET http://localhost:8080/api/cats/2
+
+
+
+### Get all cats with comments with the aggregate
+GET http://localhost:8080/api/cats/agg/all
+
+
+### Get one cat with comments with the aggregate
+GET http://localhost:8080/api/cats/agg/9
+
+
+### Get one cat with comments with the aggregate and details
+GET http://localhost:8080/api/cats/agg/9/details
+
+
+### Get user cats
+GET http://localhost:8080/api/cats/users/8
 
 
 ### Create new cat
@@ -34,6 +53,7 @@ Content-Type: application/json
 }
 
 
+
 ### Create new cat with user id not existing
 POST http://localhost:8080/api/cats
 Content-Type: application/json
@@ -46,6 +66,7 @@ Content-Type: application/json
   "images": ["", "", ""],
   "toys": ["", "", ""]
 }
+
 
 
 ### Create new cat with breed id not existing
@@ -62,6 +83,7 @@ Content-Type: application/json
 }
 
 
+
 ### Create new cat with user id and breed id not existing
 POST http://localhost:8080/api/cats
 Content-Type: application/json
@@ -74,6 +96,7 @@ Content-Type: application/json
   "images": ["", "", ""],
   "toys": ["", "", ""]
 }
+
 
 
 ### Update an existing cats
