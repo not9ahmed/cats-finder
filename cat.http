@@ -19,8 +19,36 @@ GET http://localhost:8080/api/cats/agg/all
 GET http://localhost:8080/api/cats/agg/9
 
 
+### Get all cats with comments with the aggregate and details
+GET http://localhost:8080/api/cats/agg/all/details
+
+
 ### Get one cat with comments with the aggregate and details
 GET http://localhost:8080/api/cats/agg/9/details
+
+
+### Create comment for exisiting cat
+POST http://localhost:8080/api/cats/9/comments
+Content-Type: application/json
+
+{
+  "name": "comment 222",
+  "content": "example comment 222",
+  "published_on": "",
+  "updated_on": ""
+}
+
+
+### Delete comment for exisiting cat
+DELETE http://localhost:8080/api/cats/9/comments
+Content-Type: application/json
+
+{
+  "name": "comment 222",
+  "content": "example comment 222",
+  "published_on": "2023-08-19T12:51:25.092013",
+  "updated_on": ""
+}
 
 
 ### Get user cats
@@ -33,12 +61,8 @@ Content-Type: application/json
 
 {
   "name": "Steve",
-  "breed_id": {
-    "id": 6
-  },
-  "owner_id": {
-    "id": 8
-  },
+  "breed_id": 6,
+  "owner_id": 8,
   "birth_date": "2016-03-03T22:21:09.264528",
   "images": [
     "",

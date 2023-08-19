@@ -1,4 +1,5 @@
 package com.notahmed.catsfinder.dto;
 
-public class BreedRequestDto {
-}
+public record BreedRequestDto (
+
+){}

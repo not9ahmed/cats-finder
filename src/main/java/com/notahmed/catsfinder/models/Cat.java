@@ -151,4 +151,34 @@ public class Cat {
                 // adding reference from comment to this
                 comment.cat = this;
         }
+
+
+        public void removeComment(Comment comment){
+
+
+//                for (Comment c: comments) {
+//                        if (c.getName() != comment.getName() || c.getContent() != comment.getContent()){
+//                                comments.remove(comment);
+//                                return;
+//                        }
+//                }
+
+//                comments.stream().map(
+//                        comment1 ->{
+//                                if (comment1.getName() != comment.getName() || comment1.getContent() != comment.getContent()) {
+//
+//                                }
+//
+//                        }
+//                )
+
+                // adding comment to this class
+                boolean isRemoved = comments.remove(comment);
+
+                System.out.printf("is removed: %s",isRemoved);
+                System.out.println(comments);
+
+                // adding reference from comment to this
+                comment.cat = this;
+        }
 }

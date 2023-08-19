@@ -2,8 +2,10 @@ package com.notahmed.catsfinder.controllers;
 
 import com.notahmed.catsfinder.dto.CatDetails;
 import com.notahmed.catsfinder.dto.CatDetailslNew;
+import com.notahmed.catsfinder.dto.CatRequestDto;
 import com.notahmed.catsfinder.models.Breed;
 import com.notahmed.catsfinder.models.Cat;
+import com.notahmed.catsfinder.models.Comment;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.BreedRepository;
 import com.notahmed.catsfinder.repository.CatRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cats")
@@ -141,54 +144,44 @@ public class CatController {
     // add new cat
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Cat cat){
+    public void create(@RequestBody CatRequestDto cat){
 
         System.out.println("----start of create----");
 
+        System.out.println(cat);
+
 //        breedRepository.findById(cat.breed_id().getId());
 
-        // add validation
-//        AggregateReference<Cat, Long> breed_id = AggregateReference.to(cat.id());
 
+        //check ig the breed id and owner exists first
 
-//        System.out.println("Check " +cat
+        boolean ownerExists = userRepository.existsById(cat.owner_id());
 
-//        Person p1, p2 = // some initialization
+        boolean breedExists = breedRepository.existsById(cat.breed_id());
 
-        // p1.bestFriend = AggregateReference.to(p2.id);
+        if (!ownerExists || !breedExists ) {
 
+            System.out.println("Invalid parameter");
 
-//        Optional<Breed> breedReturned = breedRepository.findById(cat.breed_id().getId());
+            return;
+        }
 
+        catRepository.save(
+                new Cat(
+                        cat.name(),
+                        AggregateReference.to(cat.breed_id()),
+                        AggregateReference.to(cat.owner_id()),
+                        cat.birth_date(),
+                        cat.images(),
+                        cat.toys()
+                        )
 
-//        System.out.println(breedReturned);
-
-
-
-//        AggregateReference breedRef = AggregateReference.to(cat.breed_id());
-
-//        breedRepository.findById(cat.breed_id());
-
-
-
-
-
-
-//        System.out.println(breedRepository.findById(cat.breed_id().getId()));
-
-//        System.out.println(cat.toString());
-
-
-//        // first get the breed from the requests
-//        AggregateReference<Breed, Long> breedID = cat.breed_id();
-//
-//        System.out.println("Breed ID " + breedID);
-
-//        boolean val = breedRepository.existsById(breedID.getId());
+        );
 
 
 
-//        AggregateReference.to(cat);
+
+
 
 
         // if the user and breed does not exist
@@ -210,25 +203,6 @@ public class CatController {
 //        }
 
 
-//        AggregateReference<Breed, Long> breedID= AggregateReference.to(cat.breedId().getId());
-//        AggregateReference<User, Long> userID= AggregateReference.to(cat.ownerId().getId());
-
-
-//        System.out.println("breedID " + breedID);
-//        System.out.println("userID " + userID);
-
-
-//        catRepository.save(new Cat(
-//                null,
-//                cat.name(),
-//                breedID,
-//                userID,
-//                cat.birth_date(),
-//                cat.images(),
-//                cat.toys()
-//        ));
-
-        catRepository.save(cat);
 
     }
 
@@ -271,6 +245,35 @@ public class CatController {
     }
 
 
+    @GetMapping("/agg/all/details")
+    public Iterable findAggAllWithDetails(){
+
+        List<Cat> cats = catRepository.findAll();
+
+
+        List<CatDetails> catsDetails = new ArrayList<>();
+
+
+        cats.forEach(cat -> {
+            catsDetails.add(new CatDetails(
+                    cat.getId(),
+                    cat.getName(),
+                    breedRepository.findById(cat.getBreedId().getId()).get(),
+                    userRepository.findById(cat.getOwnerId().getId()).get(),
+                    cat.getBirth_date(),
+                    cat.getImages(),
+                    cat.getToys(),
+                    cat.getComments()
+            ));
+        });
+
+
+
+
+        return catsDetails;
+    }
+
+
     @GetMapping("/agg/{id}")
     public Cat findAggById(@PathVariable Long id){
 
@@ -291,17 +294,84 @@ public class CatController {
                 userRepository.findById(cat.getOwnerId().getId()).get(),
                 cat.getBirth_date(),
                 cat.getImages(),
-                cat.getToys()
+                cat.getToys(),
+                cat.getComments()
         );
 
         return singleCatDetails;
 
-//        return new CatDetailslNew(
-//                cat,
-//                userRepository.findById(cat.getOwnerId().getId()).get(),
-//                breedRepository.findById(cat.getBreedId().getId()).get()
-//        );
     }
+
+
+    @PostMapping("/{id}/comments")
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public CatDetails createCatComment(@PathVariable Long id, @RequestBody Comment comment){
+
+
+        // adding comment first way
+        Cat cat = catRepository.findById(id).get();
+        cat.addComment(comment);
+        catRepository.save(cat);
+
+
+        // map the cat to dto
+        CatDetails catDetails = new CatDetails(
+                cat.getId(),
+                cat.getName(),
+                breedRepository.findById(cat.getBreedId().getId()).get(),
+                userRepository.findById(cat.getOwnerId().getId()).get(),
+                cat.getBirth_date(),
+                cat.getImages(),
+                cat.getToys(),
+                cat.getComments()
+        );
+
+
+
+        return catDetails;
+    }
+
+
+    @DeleteMapping("/{id}/comments")
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public CatDetails deleteCatComment(@PathVariable Long id, @RequestBody Comment comment) {
+
+
+        // adding comment first way
+//        Cat cat = catRepository.findById(id).get();
+//        cat.removeComment(comment);
+//        catRepository.save(cat);
+
+
+
+        // using custom query works
+        catRepository.deleteComment(id, comment.getName(), comment.getContent());
+
+        System.out.println("Delete success");
+
+
+        Cat cat = catRepository.findById(id).get();
+
+        System.out.println("cat returned "+ cat);
+
+        // map the cat to dto
+        CatDetails catDetails = new CatDetails(
+                cat.getId(),
+                cat.getName(),
+                breedRepository.findById(cat.getBreedId().getId()).get(),
+                userRepository.findById(cat.getOwnerId().getId()).get(),
+                cat.getBirth_date(),
+                cat.getImages(),
+                cat.getToys(),
+                cat.getComments()
+        );
+
+
+        return catDetails;
+    }
+
+
+
 }
 
 
