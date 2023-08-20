@@ -7,7 +7,7 @@ GET http://localhost:8080/api/cats/details
 
 
 ### Get cat by id
-GET http://localhost:8080/api/cats/2
+GET http://localhost:8080/api/cats/9
 
 
 
@@ -24,28 +24,28 @@ GET http://localhost:8080/api/cats/agg/all/details
 
 
 ### Get one cat with comments with the aggregate and details
-GET http://localhost:8080/api/cats/agg/9/details
+GET http://localhost:8080/api/cats/agg/11/details
 
 
 ### Create comment for exisiting cat
-POST http://localhost:8080/api/cats/9/comments
+POST http://localhost:8080/api/cats/11/comments
 Content-Type: application/json
 
 {
-  "name": "comment 222",
-  "content": "example comment 222",
+  "name": "Very cute cat!",
+  "content": "I like this steve",
   "published_on": "",
   "updated_on": ""
 }
 
 
-### Delete comment for exisiting cat
-DELETE http://localhost:8080/api/cats/9/comments
+### Delete comment for exisiting cat by using comment id
+DELETE http://localhost:8080/api/cats/7/comments
 Content-Type: application/json
 
 {
-  "name": "comment 222",
-  "content": "example comment 222",
+  "name": "Very cute cat!",
+  "content": "I like this car",
   "published_on": "2023-08-19T12:51:25.092013",
   "updated_on": ""
 }

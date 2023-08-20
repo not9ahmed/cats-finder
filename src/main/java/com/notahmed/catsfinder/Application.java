@@ -1,5 +1,6 @@
 package com.notahmed.catsfinder;
 
+import com.notahmed.catsfinder.dto.CatDetailsNew;
 import com.notahmed.catsfinder.models.Breed;
 import com.notahmed.catsfinder.models.Cat;
 import com.notahmed.catsfinder.models.Comment;
@@ -56,6 +57,14 @@ public class Application {
 			User ann = userRepository.findById(8L).orElse(null);
 
 			System.out.println(ann);
+
+			List<CatDetailsNew> catAndUser = catRepository.findCatAndComments(11L);
+
+
+			catAndUser.forEach(System.out::println);
+
+//			System.out.println(catAndUser);
+
 
 			// Creating the user
 //			AggregateReference<User, Long> userId = AggregateReference.to(

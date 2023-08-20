@@ -45,3 +45,8 @@ Content-Type: application/json
 
 ### Delete an existing user
 DELETE http://localhost:8080/api/users/2
+
+
+
+### Get all user cats an existing user
+GET http://localhost:8080/api/users/8/cats

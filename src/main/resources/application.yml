@@ -5,9 +5,13 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     url: ${DB_URL}
+
+# Will execute sql
 #  sql:
 #    init:
 #      mode: always
 
 logging:
   level.org.springframework.jdbc=DEBUG
+
+debug: true

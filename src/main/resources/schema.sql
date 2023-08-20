@@ -2,6 +2,7 @@
 -- DROP TABLE IF EXISTS "User" CASCADE;
 -- DROP TABLE IF EXISTS "Cat" CASCADE;
 -- DROP TABLE IF EXISTS "Breed" CASCADE;
+-- DROP TABLE IF EXISTS "Comment" CASCADE;
 
 
 -- Create User Table --
@@ -42,8 +43,10 @@ CREATE TABLE IF NOT EXISTS "Breed" (
 
 
 
--- Create Comment Table
+
+Create Comment Table
 CREATE TABLE IF NOT EXISTS "Comment" (
+    id SERIAL PRIMARY KEY,
     cat INTEGER NOT NULL,
     name VARCHAR(30) NOT NULL,
     content TEXT NOT NULL,
@@ -65,6 +68,7 @@ ALTER TABLE "Cat"
     ADD CONSTRAINT cat_breed_id_fk
         FOREIGN KEY (breed_id)
             REFERENCES "Breed"(id);
+
 
 
 ALTER TABLE "Comment"

@@ -1,5 +1,6 @@
 package com.notahmed.catsfinder.controllers;
 
+import com.notahmed.catsfinder.dto.CatDetailsNew;
 import com.notahmed.catsfinder.dto.UserRequestDto;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
@@ -119,6 +120,20 @@ public class UserController {
         }
 
         repository.deleteById(id);
+    }
+
+
+
+    // sample collection
+    @GetMapping("/{id}/cats")
+    public User findAllUseCats(@PathVariable Long id){
+
+        User userCatsAndComments = repository.findUserCatsAndComments(id);
+
+
+
+
+        return userCatsAndComments;
     }
 
 }

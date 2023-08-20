@@ -1,5 +1,6 @@
 package com.notahmed.catsfinder.repository;
 
+import com.notahmed.catsfinder.dto.CatDetailsNew;
 import com.notahmed.catsfinder.models.Cat;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -31,5 +32,24 @@ public interface CatRepository extends ListCrudRepository<Cat, Long> {
             """)
     void deleteComment(@Param("cat") Long cat, @Param("name") String name, @Param("content") String content);
 
+
+    @Modifying
+    @Query("""
+            DELETE FROM "Comment"
+            WHERE "Comment".id = :id
+            """)
+    void deleteCommentById(@Param("id") Long id);
+
+
+
+    // trying table join query
+    @Query("""
+            SELECT *
+            FROM "Cat","User", "Comment"
+            WHERE "Cat".owner_id = "User".id
+            AND "Cat".id = "Comment".cat
+            AND "Cat".id = :catId
+            """)
+    List<CatDetailsNew> findCatAndComments(@Param("catId") Long catId);
 
 }

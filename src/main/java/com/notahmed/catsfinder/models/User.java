@@ -2,8 +2,11 @@ package com.notahmed.catsfinder.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.notahmed.catsfinder.dto.CatDetailsNew;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -50,4 +53,7 @@ public record User (
         LocalDateTime details_updated,
         Character user_role,
         String profile_image
+//,
+//        @MappedCollection(keyColumn = "id", idColumn = "owner_id")
+//        Set<Cat> cats
 ){}
