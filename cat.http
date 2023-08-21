@@ -28,12 +28,12 @@ GET http://localhost:8080/api/cats/agg/11/details
 
 
 ### Create comment for exisiting cat
-POST http://localhost:8080/api/cats/11/comments
+POST http://localhost:8080/api/cats/1/comments
 Content-Type: application/json
 
 {
-  "name": "Very cute cat!",
-  "content": "I like this steve",
+  "name": "again my favorite cat",
+  "content": "I like this hazel",
   "published_on": "",
   "updated_on": ""
 }
