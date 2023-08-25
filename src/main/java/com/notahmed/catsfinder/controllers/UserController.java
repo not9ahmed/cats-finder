@@ -1,6 +1,7 @@
 package com.notahmed.catsfinder.controllers;
 
 import com.notahmed.catsfinder.dto.*;
+import com.notahmed.catsfinder.mapper.UserCatsMapper;
 import com.notahmed.catsfinder.mapper.UserDTOMapper;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
@@ -176,11 +177,24 @@ public class UserController {
     @GetMapping("/{id}/cats/comments")
     public UserJoinedDto findAllUserCatsAndComments(@PathVariable Long id){
 
+
+        // check  check if it is empty
         List <UserCatsCommentsJoinedDto> userCats = repository.findUserCatsAndComments(id);
+
 
 
         System.out.println(userCats);
 
+
+//        UserCatsMapper()
+
+
+
+        // mapper
+        UserJoinedDto user = UserCatsMapper.mapUserCat(userCats);
+
+
+        System.out.println(user);
 
         // 1- map rows to commments
         // map comments to the cats
@@ -196,48 +210,53 @@ public class UserController {
 //                        )))
 
 
-
-
         // works !!
-        Map<Long, Set<CommentJoinedDto>> commentsMap =
-                userCats.stream().map(row -> new CommentJoinedDto(
-                                        row.commentId(),
-                                        row.catId(),
-                                        row.commentName(),
-                                        row.commentContent(),
-                                        row.commentPublishedOn(),
-                                        row.commentUpdatedOn()))
-                        .collect(Collectors.groupingBy(CommentJoinedDto::cat,Collectors.toSet()));
-
-        System.out.println(commentsMap);
-
-
-        // mapping the cats to owner
-        Map<Long, Set<CatJoinedDto>> catsMap = userCats.stream().map(row -> new CatJoinedDto(
-                row.catId(),
-                row.catName(),
-                row.catBirthDate(),
-                row.userId(),
-                commentsMap.get(row.catId())
-        )).collect(Collectors.groupingBy(CatJoinedDto::ownerId, Collectors.toSet()));
-
-
-        System.out.println(catsMap);
-
-
-        // map catMap to owner
-
-        UserJoinedDto user = userCats.stream().findAny().map(row -> new UserJoinedDto(
-                row.userId(),
-                row.username(),
-                row.firstName(),
-                row.lastName(),
-                row.mobile(),
-                row.gender(),
-                row.userBirthDate(),
-                catsMap.get(row.userId())
-        )).orElse(null);
-
+//        // if the size of rows greater than two then map teh comments
+//        Map<Long, Set<CommentJoinedDto>> commentsMap =
+//                userCats.stream().filter(row -> userCats.size() > 2).map(row -> new CommentJoinedDto(
+//                                        row.commentId(),
+//                                        row.catId(),
+//                                        row.commentName(),
+//                                        row.commentContent(),
+//                                        row.commentPublishedOn(),
+//                                        row.commentUpdatedOn()))
+//                        .collect(Collectors.groupingBy(CommentJoinedDto::cat,Collectors.toSet()));
+//
+//        System.out.println("commentsMap");
+//        System.out.println(commentsMap);
+//
+//
+//        // mapping the cats to owner
+//        Map<Long, Set<CatJoinedDto>> catsMap = userCats.stream().map(row -> new CatJoinedDto(
+//                row.catId(),
+//                row.catName(),
+//                row.catBirthDate(),
+//                row.userId(),
+//                commentsMap.get(row.catId())
+//        )).collect(Collectors.groupingBy(CatJoinedDto::ownerId, Collectors.toSet()));
+//
+//
+//        System.out.println("catsMap");
+//        System.out.println(catsMap);
+//
+//
+//        // map catMap to owner
+//
+//        UserJoinedDto user = userCats.stream().findAny().map(row -> new UserJoinedDto(
+//                row.userId(),
+//                row.username(),
+//                row.firstName(),
+//                row.lastName(),
+//                row.mobile(),
+//                row.gender(),
+//                row.userBirthDate(),
+//                catsMap.get(row.userId())
+//        )).orElse(null);
+//
+//
+//
+//        System.out.println("user");
+//        System.out.println(user);
 
 //        Map<Long, CommentJoinedDto> collect = userCats.stream()
 //                .collect(Collectors.toMap(UserCatsCommentsJoinedDto::catId, row ->
@@ -295,4 +314,6 @@ public class UserController {
 
 
     }
+
+
 }

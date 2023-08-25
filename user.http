@@ -55,4 +55,4 @@ GET http://localhost:8080/api/users/8/cats
 
 
 ### Get all user cats and comments an existing user
-GET http://localhost:8080/api/users/8/cats/comments
+GET http://localhost:8080/api/users/4/cats/comments
