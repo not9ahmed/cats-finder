@@ -10,6 +10,7 @@ public record CommentJoinedDto(
         Long id,
 
 
+        Long cat,
 
         String name,
         String content,

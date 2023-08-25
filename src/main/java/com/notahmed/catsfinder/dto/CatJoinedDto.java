@@ -18,6 +18,8 @@ public record CatJoinedDto<comments>(
         @JsonProperty("birth_date")
         Date catBirthDate,
 
+        @JsonProperty("owner_id")
+        Long ownerId,
         // will reference comments
         Set<CommentJoinedDto>comments
 ) {

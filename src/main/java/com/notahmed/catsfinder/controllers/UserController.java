@@ -1,21 +1,17 @@
 package com.notahmed.catsfinder.controllers;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.notahmed.catsfinder.dto.*;
 import com.notahmed.catsfinder.mapper.UserDTOMapper;
-import com.notahmed.catsfinder.mapper.UserJoinedDtoMapper;
-import com.notahmed.catsfinder.models.Comment;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
 import jakarta.validation.Valid;
-import org.springframework.data.annotation.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/users")
@@ -178,179 +174,88 @@ public class UserController {
 
 
     @GetMapping("/{id}/cats/comments")
-    public List<UserJoinedDto> findAllUserCatsAndComments(@PathVariable Long id){
+    public UserJoinedDto findAllUserCatsAndComments(@PathVariable Long id){
 
         List <UserCatsCommentsJoinedDto> userCats = repository.findUserCatsAndComments(id);
 
-        HashMap<Long, CommentJoinedDto> catComments = new HashMap<Long, CommentJoinedDto>();
+
+        System.out.println(userCats);
+
+
+        // 1- map rows to commments
+        // map comments to the cats
+        // 2 map cat to user
+
+
+
+//        yourTypes.stream()
+//                .collect(Collectors.groupingBy(
+//                        ObjectA::getType,
+//                        Collectors.mapping(
+//                                ObjectA::getId, Collectors.toList()
+//                        )))
 
 
 
 
-        for (UserCatsCommentsJoinedDto c: userCats) {
-            catComments.put(c.commentId(), new CommentJoinedDto(
-                    c.commentId(),
-                    c.commentName(),
-                    c.commentContent(),
-                    c.commentPublishedOn(),
-                    c.commentUpdatedOn())
-            );
+        // works !!
+        Map<Long, Set<CommentJoinedDto>> commentsMap =
+                userCats.stream().map(row -> new CommentJoinedDto(
+                                        row.commentId(),
+                                        row.catId(),
+                                        row.commentName(),
+                                        row.commentContent(),
+                                        row.commentPublishedOn(),
+                                        row.commentUpdatedOn()))
+                        .collect(Collectors.groupingBy(CommentJoinedDto::cat,Collectors.toSet()));
 
-        }
-
-
-        System.out.println("catComments");
-
-        System.out.println(catComments.toString());
+        System.out.println(commentsMap);
 
 
-        HashMap<Long, CatJoinedDto> cats = new HashMap<Long, CatJoinedDto>();
-
-        for (UserCatsCommentsJoinedDto c: userCats) {
-
-
-
-            cats.put(c.commentId(), new CatJoinedDto(
-                    c.catId(),
-                    c.catName(),
-                    c.catBirthDate(),
-                    null
-            ));
-
-        }
+        // mapping the cats to owner
+        Map<Long, Set<CatJoinedDto>> catsMap = userCats.stream().map(row -> new CatJoinedDto(
+                row.catId(),
+                row.catName(),
+                row.catBirthDate(),
+                row.userId(),
+                commentsMap.get(row.catId())
+        )).collect(Collectors.groupingBy(CatJoinedDto::ownerId, Collectors.toSet()));
 
 
-        System.out.println("catsWithComments");
-
-        System.out.println(cats.toString());
-
-//
-//        for(CommentJoinedDto comment : catComments.values()){
-//
-//            for (CatJoinedDto cat : cats.values()) {
-//
-//                if (comment.cat() == cat.) {
-//
-//                }
-//            }
-//        }
+        System.out.println(catsMap);
 
 
+        // map catMap to owner
+
+        UserJoinedDto user = userCats.stream().findAny().map(row -> new UserJoinedDto(
+                row.userId(),
+                row.username(),
+                row.firstName(),
+                row.lastName(),
+                row.mobile(),
+                row.gender(),
+                row.userBirthDate(),
+                catsMap.get(row.userId())
+        )).orElse(null);
 
 
-//        for (UserCatsCommentsJoinedDto c: userCats) {
-//            catComments.put(c.commentId(), new CommentJoinedDto(
-//                    c.commentId(),
-//                    c.commentName(),
-//                    c.commentContent(),
-//                    c.commentPublishedOn(),
-//                    c.commentUpdatedOn())
-//            );
-//
-//        }
-
-
-//        // printing joined table
-//        System.out.println("priniting joined cats");
-//        userCats.forEach(System.out::println);
-//
-//        // map the comments then cats, then user
-//        Set<CommentJoinedDto> comments = userCats.stream().map(comment -> new CommentJoinedDto(
-//                comment.commentId(),
-//                comment.commentName(),
-//                comment.commentContent(),
-//                comment.commentPublishedOn(),
-//                comment.commentUpdatedOn()
-//        )).collect(Collectors.toSet());
-//
-//
-//        System.out.println("comments");
-//        comments.forEach(System.out::println);
-//
-//
-//        Set<CatJoinedDto> catsWithComments = userCats.stream().map(cat -> new CatJoinedDto(
-//                cat.catId(),
-//                cat.catName(),
-//                cat.catBirthDate(),
-//                comments
-//        )).collect(Collectors.toSet());
-//
-//
-//        catsWithComments.forEach(System.out::println);
-//
-//
-//        System.out.println("only the first");
-//        CatJoinedDto catJoinedDto = catsWithComments;
-
-//        System.out.println(catJoinedDto);
-
-
-//        new UserJoinedDto(
-//
-//                catsWithComments.stream().findFirst().map(
-//
-//                userCats.get(0).username(),
-//                userCats.get(0).firstName(),
-//
-//                userCats.get(0).lastName(),
-//                userCats.get(0).mobile(),
-//                userCats.get(0).gender(),
-//                userCats.get(0).userBirthDate(),
-//                cats
-//                )
-//        ));
-
-
-        // mapping cats to user
-        //        UserJoinedDto user = new UserJoinedDto(
-//                userCats.get(0).userId(),
-//                userCats.get(0).username(),
-//                userCats.get(0).firstName(),
-//
-//                userCats.get(0).lastName(),
-//                userCats.get(0).mobile(),
-//                userCats.get(0).gender(),
-//                userCats.get(0).userBirthDate(),
-//                cats
-//
-//        );
-
-//        System.out.println("usercats and comments list");
-//        userCats.forEach(System.out::println);
-
-
-//        UserJoinedDto user = mapToUserJoinedDto(userCats);
-
-
-        // in stream
-//        Set<CatJoinedDto> cats = userCats.stream().map(cat -> new CatJoinedDto(
-//                cat.catId(),
-//                cat.catName(),
-//                cat.catBirthDate(),
-//                null
-//        )).collect(Collectors.toSet());
-//
-//
-//        UserJoinedDto user = new UserJoinedDto(
-//                userCats.get(0).userId(),
-//                userCats.get(0).username(),
-//                userCats.get(0).firstName(),
-//
-//                userCats.get(0).lastName(),
-//                userCats.get(0).mobile(),
-//                userCats.get(0).gender(),
-//                userCats.get(0).userBirthDate(),
-//                cats
-//
-//        );
-
-//        Stream<UserJoinedDto> user = userCats.stream().map(userDTOMapper);
+//        Map<Long, CommentJoinedDto> collect = userCats.stream()
+//                .collect(Collectors.toMap(UserCatsCommentsJoinedDto::catId, row ->
+//                        new CommentJoinedDto(
+//                                row.commentId(),
+//                                row.catId(),
+//                                row.commentName(),
+//                                row.commentContent(),
+//                                row.commentPublishedOn(),
+//                                row.commentUpdatedOn()
+//                        )));
 
 
 
 
 
-        return null;
+
+        return user;
     }
 
 
@@ -380,6 +285,7 @@ public class UserController {
                         cat.catId(),
                         cat.catName(),
                         cat.catBirthDate(),
+                        null,
                         null
                 )).collect(Collectors.toSet())
 
