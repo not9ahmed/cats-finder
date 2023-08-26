@@ -1,6 +1,5 @@
 package com.notahmed.catsfinder.repository;
 
-import com.notahmed.catsfinder.dto.CatDetailsNew;
 import com.notahmed.catsfinder.dto.UserCatsCommentsJoinedDto;
 import com.notahmed.catsfinder.dto.UserCatsJoinedDto;
 import com.notahmed.catsfinder.models.User;
@@ -9,11 +8,14 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends ListCrudRepository<User, Long> {
 
 
     User findUserByUsername(String username);
+
+
 
     Boolean existsByUsername(String username);
 
@@ -39,6 +41,35 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
 
 
 
+    @Query("""
+            SELECT  "User"."id" AS "user_id",
+                    "User"."username" AS "username",
+                    "User"."first_name" AS "first_name",
+                    "User"."last_name" AS "last_name",
+                    "User"."mobile" AS "mobile",
+                    "User"."gender" AS "gender",
+                    "User"."birth_date" AS "user_birth_date",
+                    "Cat"."id" AS "cat_id",
+                    "Cat"."name" AS "cat_name",
+                    "Cat"."birth_date" AS "cat_birth_date",
+                    "Comment"."id" AS "comment_id",
+                    "Comment"."name" AS "comment_name",
+                    "Comment"."content" AS "comment_content",
+                    "Comment"."published_on" AS "comment_published_on",
+                    "Comment"."updated_on" AS "comment_updated_on"
+            FROM "User"
+            FULL OUTER JOIN "Cat"
+            ON "User"."id" = "Cat"."owner_id" 
+            FULL OUTER JOIN "Comment"
+            ON "Cat"."id" = "Comment"."cat"
+
+            """)
+    List<UserCatsCommentsJoinedDto> findAllUsersCatsAndComments();
+
+
+
+
+
     // three joins user, cats and comments
     @Query("""
             SELECT  "User"."id" AS "user_id",
@@ -57,11 +88,12 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
                     "Comment"."published_on" AS "comment_published_on",
                     "Comment"."updated_on" AS "comment_updated_on"
             FROM "User"
-            INNER JOIN "Cat"
+            FULL OUTER JOIN "Cat"
             ON "User"."id" = "Cat"."owner_id" 
             FULL OUTER JOIN "Comment"
             ON "Cat"."id" = "Comment"."cat"
             WHERE "User"."id" = :userId
+            ORDER BY "User"."id"
             """)
     List<UserCatsCommentsJoinedDto> findUserCatsAndComments(@Param("userId") Long userId);
 

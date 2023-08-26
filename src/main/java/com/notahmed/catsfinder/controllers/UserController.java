@@ -1,8 +1,7 @@
 package com.notahmed.catsfinder.controllers;
 
 import com.notahmed.catsfinder.dto.*;
-import com.notahmed.catsfinder.mapper.UserCatsMapper;
-import com.notahmed.catsfinder.mapper.UserDTOMapper;
+import com.notahmed.catsfinder.mapper.UserMapper;
 import com.notahmed.catsfinder.models.User;
 import com.notahmed.catsfinder.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,16 +19,16 @@ public class UserController {
 
 
     // using java jdbc from the repository
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
 
     // injecting the custom mapper
-    private final UserDTOMapper userDTOMapper;
+    private final UserMapper userMapper;
 
     // add the constructor
-    public UserController(UserRepository repository, UserDTOMapper userDTOMapper) {
-        this.repository = repository;
-        this.userDTOMapper = userDTOMapper;
+    public UserController(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     // URL Paths Here and they will call some function in the repository
@@ -40,7 +38,7 @@ public class UserController {
     @GetMapping("")
     public List<UserRequestDto> findAll(){
 
-        List<User> usersList = repository.findAll();
+        List<User> usersList = userRepository.findAll();
 
         List<UserRequestDto> usersListFiltered  = usersList.stream().map(user -> new UserRequestDto(
                 user.id(),
@@ -62,7 +60,7 @@ public class UserController {
 //        return (User) repository.findById(id).orElse();
 
 
-        User userDb = repository.findById(id).orElseThrow(
+        User userDb = userRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")
         );
 
@@ -87,14 +85,14 @@ public class UserController {
 
 
         //check if the user exists first
-        if (repository.existsByUsername(user.username())) {
+        if (userRepository.existsByUsername(user.username())) {
             System.out.println("user already exists");
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "user already exists");
         }
 
 
         System.out.println("User created");
-        repository.save(user);
+        userRepository.save(user);
 
 //        return new ResponseEntity<>(user, HttpStatus.OK);
 
@@ -107,11 +105,11 @@ public class UserController {
     @PutMapping("/{id}")
     public void update(@RequestBody User user, @PathVariable Long id){
 
-        if (!repository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
         }
 
-        repository.save(user);
+        userRepository.save(user);
 
 
     }
@@ -120,11 +118,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-        if (!repository.existsById(id)){
+        if (!userRepository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
         }
 
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 
@@ -133,41 +131,13 @@ public class UserController {
     @GetMapping("/{id}/cats")
     public UserJoinedDto findAllUserCats(@PathVariable Long id){
 
-        List <UserCatsJoinedDto> userCats = repository.findUserCats(id);
+        List <UserCatsJoinedDto> userCats = userRepository.findUserCats(id);
 
         System.out.println("usercats list");
         userCats.forEach(System.out::println);
 
 
-
-
-
-        // in stream
-//        Set<CatJoinedDto> cats = userCats.stream().map(cat -> new CatJoinedDto(
-//                cat.catId(),
-//                cat.catName(),
-//                cat.catBirthDate(),
-//                null
-//        )).collect(Collectors.toSet());
-
-
-//        UserJoinedDto user = new UserJoinedDto(
-//                userCats.get(0).userId(),
-//                userCats.get(0).username(),
-//                userCats.get(0).firstName(),
-//
-//                userCats.get(0).lastName(),
-//                userCats.get(0).mobile(),
-//                userCats.get(0).gender(),
-//                userCats.get(0).userBirthDate(),
-//                cats
-//
-//        );
-
-
-        UserJoinedDto user = mapToUserJoinedDto(userCats);
-
-
+        UserJoinedDto user = userMapper.mapToUserJoinedDto(userCats);
 
 
         return user;
@@ -175,145 +145,62 @@ public class UserController {
 
 
     @GetMapping("/{id}/cats/comments")
-    public UserJoinedDto findAllUserCatsAndComments(@PathVariable Long id){
+    public UserJoinedDto findUserCatsAndComments(@PathVariable Long id){
+
+
 
 
         // check  check if it is empty
-        List <UserCatsCommentsJoinedDto> userCats = repository.findUserCatsAndComments(id);
+        List <UserCatsCommentsJoinedDto> userCats = userRepository.findUserCatsAndComments(id);
 
+
+        if (userCats.size() == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
+        }
+
+        System.out.println(userCats);
+
+
+        // mapper
+        UserJoinedDto user = userMapper.mapUserCat(userCats);
+
+        System.out.println(user);
+
+
+        return user;
+    }
+
+
+    @GetMapping("/cats/comments")
+    public List<UserJoinedDto> findAllUsersCatsAndComments(){
+
+
+        // check  check if it is empty
+        List <UserCatsCommentsJoinedDto> userCats = userRepository.findAllUsersCatsAndComments();
 
 
         System.out.println(userCats);
 
 
-//        UserCatsMapper()
-
-
-
         // mapper
-        UserJoinedDto user = UserCatsMapper.mapUserCat(userCats);
+        List<UserJoinedDto> users = userMapper.mapUsersCatList(userCats);
+
+        System.out.println(users);
 
 
-        System.out.println(user);
-
-        // 1- map rows to commments
-        // map comments to the cats
-        // 2 map cat to user
-
-
-
-//        yourTypes.stream()
-//                .collect(Collectors.groupingBy(
-//                        ObjectA::getType,
-//                        Collectors.mapping(
-//                                ObjectA::getId, Collectors.toList()
-//                        )))
-
-
-        // works !!
-//        // if the size of rows greater than two then map teh comments
-//        Map<Long, Set<CommentJoinedDto>> commentsMap =
-//                userCats.stream().filter(row -> userCats.size() > 2).map(row -> new CommentJoinedDto(
-//                                        row.commentId(),
-//                                        row.catId(),
-//                                        row.commentName(),
-//                                        row.commentContent(),
-//                                        row.commentPublishedOn(),
-//                                        row.commentUpdatedOn()))
-//                        .collect(Collectors.groupingBy(CommentJoinedDto::cat,Collectors.toSet()));
-//
-//        System.out.println("commentsMap");
-//        System.out.println(commentsMap);
-//
-//
-//        // mapping the cats to owner
-//        Map<Long, Set<CatJoinedDto>> catsMap = userCats.stream().map(row -> new CatJoinedDto(
-//                row.catId(),
-//                row.catName(),
-//                row.catBirthDate(),
-//                row.userId(),
-//                commentsMap.get(row.catId())
-//        )).collect(Collectors.groupingBy(CatJoinedDto::ownerId, Collectors.toSet()));
-//
-//
-//        System.out.println("catsMap");
-//        System.out.println(catsMap);
-//
-//
-//        // map catMap to owner
-//
-//        UserJoinedDto user = userCats.stream().findAny().map(row -> new UserJoinedDto(
-//                row.userId(),
-//                row.username(),
-//                row.firstName(),
-//                row.lastName(),
-//                row.mobile(),
-//                row.gender(),
-//                row.userBirthDate(),
-//                catsMap.get(row.userId())
-//        )).orElse(null);
-//
-//
-//
-//        System.out.println("user");
-//        System.out.println(user);
-
-//        Map<Long, CommentJoinedDto> collect = userCats.stream()
-//                .collect(Collectors.toMap(UserCatsCommentsJoinedDto::catId, row ->
-//                        new CommentJoinedDto(
-//                                row.commentId(),
-//                                row.catId(),
-//                                row.commentName(),
-//                                row.commentContent(),
-//                                row.commentPublishedOn(),
-//                                row.commentUpdatedOn()
-//                        )));
-
-
-
-
-
-
-        return user;
+        return users;
     }
 
 
 
+    @GetMapping("/search")
+    public User searchForUser(@RequestParam(required = false) String q){
 
-    public static UserJoinedDto mapToUserJoinedDto(List <UserCatsJoinedDto> userCats){
+        User user = userRepository.findUserByUsername(q);
 
-
-//        Set<CatJoinedDto> cats = userCats.stream().map(cat -> new CatJoinedDto(
-//                cat.catId(),
-//                cat.catName(),
-//                cat.catBirthDate(),
-//                null
-//        )).collect(Collectors.toSet());
-
-
-        UserJoinedDto user = new UserJoinedDto(
-                userCats.get(0).userId(),
-                userCats.get(0).username(),
-                userCats.get(0).firstName(),
-
-                userCats.get(0).lastName(),
-                userCats.get(0).mobile(),
-                userCats.get(0).gender(),
-                userCats.get(0).userBirthDate(),
-                userCats.stream().map(cat -> new CatJoinedDto(
-                        cat.catId(),
-                        cat.catName(),
-                        cat.catBirthDate(),
-                        null,
-                        null
-                )).collect(Collectors.toSet())
-
-        );
 
         return user;
 
-
     }
-
 
 }

@@ -34,24 +34,11 @@ public class Application {
 
 
 	@Bean
-	CommandLineRunner commandLineRunner(UserRepository userRepository, CatRepository catRepository, BreedRepository breedRepository)  {
-
-
-//		Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse("03/33/2023");
-
-		Date birthdate = new Date();
+	CommandLineRunner commandLineRunner(UserRepository userRepository, CatRepository catRepository)  {
 
 
 
 		return args -> {
-
-
-			// remove the exisiting cat first
-//			catRepository.deleteById(5L);
-
-			// remove the existing user
-//			userRepository.deleteById(14L);
-//			userRepository.deleteById(16L);
 
 
 			User ann = userRepository.findById(8L).orElse(null);
@@ -60,45 +47,12 @@ public class Application {
 
 			List<CatDetailsNew> catAndUser = catRepository.findCatAndComments(11L);
 
+			System.out.println("catAndUser");
+			System.out.println(catAndUser);
 
 			catAndUser.forEach(System.out::println);
 
-//			System.out.println(catAndUser);
 
-
-			// Creating the user
-//			AggregateReference<User, Long> userId = AggregateReference.to(
-//					userRepository.save(
-//						new User(null, "testing_aggregate123", "123456",
-//								"Ahmed", "Adel", "12345",
-//								'M', birthdate, LocalDateTime.now(),
-//								'A', "")
-//					).id()
-//			);
-
-//
-//			// Get breed from the db
-//			AggregateReference<Breed, Long> breedId = AggregateReference.to(
-//					breedRepository.findById(5L).orElse(null).id()
-//			);
-//
-//
-//
-//			// It is the aggregate root for comment
-//			// Creating cat for the user
-//			Cat myCat = new Cat("meowiee", breedId, userId, birthdate,
-//							new ArrayList<String>(List.of("image1", "image2")),
-//							new ArrayList<String>(List.of("toy1", "toy2"))
-//			);
-//
-//			myCat.addComment(
-//					new Comment("Very cute cat!", "I like this car"
-//					)
-//			);
-//
-//
-//			// saving the cat with comments
-//			catRepository.save(myCat);
 
 		};
 

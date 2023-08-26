@@ -8,6 +8,7 @@ import com.notahmed.catsfinder.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CatDTOMapper {
 //    private final List<CatDetails>;
 

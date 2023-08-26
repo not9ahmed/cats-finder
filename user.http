@@ -11,12 +11,12 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-  "username": "ann_sordo",
+  "username": "sample_user",
   "password": "12341234",
-  "first_name": "Ann",
-  "last_name": "Sordo",
+  "first_name": "sample",
+  "last_name": "user",
   "mobile": "12341234",
-  "gender": "F",
+  "gender": "M",
   "birth_date": "1999-09-03T22:21:09.264528",
   "details_updated": "2023-06-21T22:21:09.264528",
   "user_role": "A",
@@ -54,5 +54,15 @@ GET http://localhost:8080/api/users/8/cats
 
 
 
-### Get all user cats and comments an existing user
-GET http://localhost:8080/api/users/4/cats/comments
+### Get user cats and comments an existing user
+GET http://localhost:8080/api/users/8/cats/comments
+
+
+
+### Get all users cats and comments with an existing user
+GET http://localhost:8080/api/users/cats/comments
+
+
+
+### Search for user
+GET http://localhost:8080/api/users/search?q=ann_sordo
