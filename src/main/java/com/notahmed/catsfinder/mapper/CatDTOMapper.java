@@ -1,9 +1,7 @@
 package com.notahmed.catsfinder.mapper;
 
 import com.notahmed.catsfinder.dto.CatDetails;
-import com.notahmed.catsfinder.models.Breed;
-import com.notahmed.catsfinder.models.Cat;
-import com.notahmed.catsfinder.models.User;
+import com.notahmed.catsfinder.model.Cat;
 
 import java.util.ArrayList;
 import java.util.List;

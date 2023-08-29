@@ -1,10 +1,9 @@
 package com.notahmed.catsfinder.dto;
 
-import com.notahmed.catsfinder.models.Breed;
-import com.notahmed.catsfinder.models.Comment;
-import com.notahmed.catsfinder.models.User;
+import com.notahmed.catsfinder.model.Breed;
+import com.notahmed.catsfinder.model.Comment;
+import com.notahmed.catsfinder.model.User;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;

@@ -1,6 +1,6 @@
-package com.notahmed.catsfinder.controllers;
+package com.notahmed.catsfinder.controller;
 
-import com.notahmed.catsfinder.models.Breed;
+import com.notahmed.catsfinder.model.Breed;
 import com.notahmed.catsfinder.repository.BreedRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

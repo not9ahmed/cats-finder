@@ -1,18 +1,11 @@
-package com.notahmed.catsfinder.models;
+package com.notahmed.catsfinder.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.notahmed.catsfinder.dto.CatDetailsNew;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 //@JsonIgnoreProperties(value = { "password", "details_updated"})
 //@Table("User")

@@ -1,4 +1,4 @@
-package com.notahmed.catsfinder.models;
+package com.notahmed.catsfinder.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

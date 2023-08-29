@@ -1,9 +1,7 @@
 package com.notahmed.catsfinder.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.notahmed.catsfinder.models.Comment;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.Date;
 import java.util.Set;

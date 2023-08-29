@@ -2,13 +2,12 @@ package com.notahmed.catsfinder.repository;
 
 import com.notahmed.catsfinder.dto.UserCatsCommentsJoinedDto;
 import com.notahmed.catsfinder.dto.UserCatsJoinedDto;
-import com.notahmed.catsfinder.models.User;
+import com.notahmed.catsfinder.model.User;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepository extends ListCrudRepository<User, Long> {
 

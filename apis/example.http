@@ -1,0 +1,33 @@
+### Get
+GET http://localhost:8080/api/example?id=10&name=ahmed
+
+
+### Post
+POST http://localhost:8080/api/example?name=ahmed
+Content-Type: application/json
+
+{
+  "name": "again my favorite cat",
+  "content": "I like this hazel",
+  "published_on": "",
+  "updated_on": ""
+}
+
+
+### get
+GET http://localhost:8080/api/example/foos
+
+
+### params
+GET http://localhost:8080/api/example/params?id=3,4,5&name=Ahmed&age=23&hobby=coding
+
+
+### multi params
+GET http://localhost:8080/api/example/multiparams?id=3,4&id=5&id=10
+
+
+### jdbc
+GET http://localhost:8080/api/example/jdbc
+
+
+

@@ -1,4 +1,4 @@
-package com.notahmed.catsfinder.models;
+package com.notahmed.catsfinder.model;
 
 public enum Gender {
     Male,

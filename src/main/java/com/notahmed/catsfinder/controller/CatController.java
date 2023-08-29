@@ -1,9 +1,9 @@
-package com.notahmed.catsfinder.controllers;
+package com.notahmed.catsfinder.controller;
 
 import com.notahmed.catsfinder.dto.CatDetails;
 import com.notahmed.catsfinder.dto.CatRequestDto;
-import com.notahmed.catsfinder.models.Cat;
-import com.notahmed.catsfinder.models.Comment;
+import com.notahmed.catsfinder.model.Cat;
+import com.notahmed.catsfinder.model.Comment;
 import com.notahmed.catsfinder.repository.BreedRepository;
 import com.notahmed.catsfinder.repository.CatRepository;
 import com.notahmed.catsfinder.repository.UserRepository;

@@ -1,8 +1,8 @@
-package com.notahmed.catsfinder.controllers;
+package com.notahmed.catsfinder.controller;
 
 import com.notahmed.catsfinder.dto.*;
 import com.notahmed.catsfinder.mapper.UserMapper;
-import com.notahmed.catsfinder.models.User;
+import com.notahmed.catsfinder.model.User;
 import com.notahmed.catsfinder.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

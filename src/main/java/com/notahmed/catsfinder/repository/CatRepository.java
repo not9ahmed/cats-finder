@@ -1,7 +1,7 @@
 package com.notahmed.catsfinder.repository;
 
 import com.notahmed.catsfinder.dto.CatDetailsNew;
-import com.notahmed.catsfinder.models.Cat;
+import com.notahmed.catsfinder.model.Cat;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;

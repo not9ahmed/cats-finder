@@ -6,12 +6,32 @@ spring:
     password: ${DB_PASSWORD}
     url: ${DB_URL}
 
+
+#  profiles:
+#    default: "dev"
+
+
+
 # Will execute sql
 #  sql:
 #    init:
 #      mode: always
+#  sql:
+#    init:
+#      schema-locations:
+#  sql:
+#    init:
+#      data-locations:
 
 logging:
-  level.org.springframework.jdbc=DEBUG
+  level:
+#    root: "warn"
+#    org.springframework.web: DEBUG
+    org.springframework.jdbc: DEBUG
 
-debug: true
+debug:
+  true
+
+server:
+  port=${PORT}:
+
