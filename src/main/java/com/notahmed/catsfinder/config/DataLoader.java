@@ -2,10 +2,13 @@ package com.notahmed.catsfinder.config;
 
 import com.notahmed.catsfinder.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 //import org.springframework.stereotype.Controller;
 
-//@Controller
+
+// This Command Line class will run only with the dev profile
+@Profile("dev")
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -17,7 +20,7 @@ public class DataLoader implements CommandLineRunner {
 
 //        userRepository.saveAll()
 
-        System.out.println("hello");
+        System.out.println("hello from data loader");
 
     }
 }

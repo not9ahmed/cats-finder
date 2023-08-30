@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserRepository extends ListCrudRepository<User, Long> {
 
 
+    //Query Derivation
     User findUserByUsername(String username);
 
 
@@ -19,8 +20,11 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
     Boolean existsByUsername(String username);
 
 
+
+    // Query annotation for more control
     // This works well!!
     // N+1 Query solved
+
     @Query("""
             SELECT  "User"."id" AS "user_id",
                     "User"."username" AS "username",

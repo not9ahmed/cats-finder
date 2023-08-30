@@ -1,0 +1,6 @@
+cf:
+  welcome-message: THIS IS PRODUCTION!!!
+  about: this api is just a sample project using spring boot in PRODUCTION
+
+
+# adding production database and stuff can be here!

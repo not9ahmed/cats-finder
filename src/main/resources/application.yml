@@ -6,9 +6,10 @@ spring:
     password: ${DB_PASSWORD}
     url: ${DB_URL}
 
+  profiles:
+    active: dev
 
-#  profiles:
-#    default: "dev"
+
 
 
 
@@ -29,9 +30,38 @@ logging:
 #    org.springframework.web: DEBUG
     org.springframework.jdbc: DEBUG
 
-debug:
-  true
+#debug:
+#  true
 
+# will be overridden by
+# Run -> Edit Configurations -> Modify Options -> Environment Variables
+
+# Choosing the port
 server:
-  port=${PORT}:
+  port=${PORT}
 
+#server:
+#  port: 8080
+
+
+cf:
+  welcome-message: Welcome to cat finder
+  about: this api is just a sample project using spring boot
+
+
+# adding dev database and stuff can be here!
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+
+  info:
+    env:
+      enabled: true
