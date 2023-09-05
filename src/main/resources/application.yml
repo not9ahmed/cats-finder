@@ -24,11 +24,11 @@ spring:
 #    init:
 #      data-locations:
 
-logging:
-  level:
-#    root: "warn"
-#    org.springframework.web: DEBUG
-    org.springframework.jdbc: DEBUG
+#logging:
+#  level:
+##    root: "warn"
+##    org.springframework.web: DEBUG
+#    org.springframework.jdbc: DEBUG
 
 #debug:
 #  true
@@ -37,8 +37,8 @@ logging:
 # Run -> Edit Configurations -> Modify Options -> Environment Variables
 
 # Choosing the port
-server:
-  port=${PORT}
+#server:
+#  port=${PORT}
 
 #server:
 #  port: 8080

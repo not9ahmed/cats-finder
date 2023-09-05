@@ -8,6 +8,7 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<!-- Usef for creating the jar files -->
 	<groupId>com.notahmed</groupId>
 	<artifactId>cats-finder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
