@@ -36,12 +36,12 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("hello from data loader");
 
-//        try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/content.json")) {
-//
-//            userRepository.saveAll(objectMapper.readValue(inputStream, new TypeReference<List<User>>() {
-//            }));
-//
-//
-//        }
+        try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/content.json")) {
+
+            userRepository.saveAll(objectMapper.readValue(inputStream, new TypeReference<List<User>>() {
+            }));
+
+
+        }
     }
 }
