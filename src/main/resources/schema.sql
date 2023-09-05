@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS "Breed" (
 
 
 
-Create Comment Table
+--Create Comment Table--
 CREATE TABLE IF NOT EXISTS "Comment" (
     id SERIAL PRIMARY KEY,
     cat INTEGER NOT NULL,
