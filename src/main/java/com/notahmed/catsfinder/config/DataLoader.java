@@ -14,7 +14,7 @@ import java.util.List;
 
 
 // This Command Line class will run only with the dev profile
-@Profile("dev")
+//@Profile("dev")
 @Component
 public class DataLoader implements CommandLineRunner {
 

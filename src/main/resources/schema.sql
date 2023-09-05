@@ -57,21 +57,21 @@ CREATE TABLE IF NOT EXISTS "Comment" (
 
 
 -- Adding the foreign keys
-ALTER TABLE "Cat"
-    ADD CONSTRAINT cat_owner_id_fk
-        FOREIGN KEY (owner_id)
-            REFERENCES "User"(id);
-
-
-
-ALTER TABLE "Cat"
-    ADD CONSTRAINT cat_breed_id_fk
-        FOREIGN KEY (breed_id)
-            REFERENCES "Breed"(id);
-
-
-
-ALTER TABLE "Comment"
-    ADD CONSTRAINT comment_cat_fk
-        FOREIGN KEY (cat)
-            REFERENCES "Cat"(id);
+-- ALTER TABLE "Cat"
+--     ADD CONSTRAINT cat_owner_id_fk
+--         FOREIGN KEY (owner_id)
+--             REFERENCES "User"(id);
+--
+--
+--
+-- ALTER TABLE "Cat"
+--     ADD CONSTRAINT cat_breed_id_fk
+--         FOREIGN KEY (breed_id)
+--             REFERENCES "Breed"(id);
+--
+--
+--
+-- ALTER TABLE "Comment"
+--     ADD CONSTRAINT comment_cat_fk
+--         FOREIGN KEY (cat)
+--             REFERENCES "Cat"(id);
