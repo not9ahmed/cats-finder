@@ -4,3 +4,9 @@ cf:
 
 
 # adding production database and stuff can be here!
+spring:
+
+  datasource:
+    url: postgresql://postgres:${PGHOST}:${PGPORT}/${PGDATABASE}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
