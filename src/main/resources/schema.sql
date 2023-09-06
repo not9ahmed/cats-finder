@@ -3,7 +3,9 @@
 -- DROP TABLE IF EXISTS "Cat" CASCADE;
 -- DROP TABLE IF EXISTS "Breed" CASCADE;
 -- DROP TABLE IF EXISTS "Comment" CASCADE;
-
+-- ALTER TABLE "Cat" DROP CONSTRAINT cat_owner_id_fk
+-- ALTER TABLE "Cat" DROP CONSTRAINT cat_breed_id_fk
+-- ALTER TABLE "Comment" DROP CONSTRAINT comment_cat_fk
 
 -- Create User Table --
 CREATE TABLE IF NOT EXISTS "User" (
