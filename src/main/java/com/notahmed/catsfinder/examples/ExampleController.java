@@ -4,6 +4,7 @@ import com.notahmed.catsfinder.model.User;
 import com.notahmed.catsfinder.repository.template.UserJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -115,5 +116,11 @@ public class ExampleController {
     @GetMapping("/jdbc")
     public List<User> getAllUsers(){
         return userJdbcTemplate.findAllUsers();
+    }
+
+
+    @GetMapping("/auth")
+    public String authHome(Principal principal){
+        return "Hello " + principal.getName();
     }
 }
