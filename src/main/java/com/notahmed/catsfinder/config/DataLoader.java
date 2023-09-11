@@ -14,20 +14,20 @@ import java.util.List;
 
 
 // This Command Line class will run only with the dev profile
-//@Profile("dev")
+@Profile("production")
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final UserRepository userRepository;
-
-    // comes from jackson
-    // way to create objects out of json and deserialize to json
-    private final ObjectMapper objectMapper;
-
-    public DataLoader(UserRepository userRepository, ObjectMapper objectMapper) {
-        this.userRepository = userRepository;
-        this.objectMapper = objectMapper;
-    }
+//    private final UserRepository userRepository;
+//
+//    // comes from jackson
+//    // way to create objects out of json and deserialize to json
+//    private final ObjectMapper objectMapper;
+//
+//    public DataLoader(UserRepository userRepository, ObjectMapper objectMapper) {
+//        this.userRepository = userRepository;
+//        this.objectMapper = objectMapper;
+//    }
 
 
     @Override
@@ -36,16 +36,16 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("hello from data loader");
 
-        if (userRepository.count() == 0) {
-
-            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/content.json")) {
-
-                userRepository.saveAll(objectMapper.readValue(inputStream, new TypeReference<List<User>>() {
-                }));
-
-
-            }
-
-        }
+//        if (userRepository.count() == 0) {
+//
+//            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/content.json")) {
+//
+//                userRepository.saveAll(objectMapper.readValue(inputStream, new TypeReference<List<User>>() {
+//                }));
+//
+//
+//            }
+//
+//        }
     }
 }

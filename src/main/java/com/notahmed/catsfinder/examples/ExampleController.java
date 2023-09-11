@@ -119,8 +119,5 @@ public class ExampleController {
     }
 
 
-    @GetMapping("/auth")
-    public String authHome(Principal principal){
-        return "Hello " + principal.getName();
-    }
+
 }
