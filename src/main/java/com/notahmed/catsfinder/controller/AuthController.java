@@ -19,6 +19,7 @@ public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
 
+    // dependency injection
     private final TokenService tokenService;
 
     public AuthController(TokenService tokenService) {

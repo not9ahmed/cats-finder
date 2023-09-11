@@ -36,6 +36,7 @@ public class TokenService {
 
     public String generateToken(Authentication authentication) {
 
+        // get current time
         Instant now = Instant.now();
 
 
