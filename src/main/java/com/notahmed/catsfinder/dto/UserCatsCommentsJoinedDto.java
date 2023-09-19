@@ -3,6 +3,7 @@ package com.notahmed.catsfinder.dto;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+// No need for this I should handle the mapping directly in terms of loop and using the mapRow
 public record UserCatsCommentsJoinedDto(
 
         Long userId,
