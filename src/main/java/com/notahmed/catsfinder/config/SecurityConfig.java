@@ -38,44 +38,44 @@ public class SecurityConfig {
 
     // noop will hash the password
 
-    @Bean
-    public InMemoryUserDetailsManager user() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("notahmed")
-                        .password("{noop}password")
-                        .authorities("read")
-                        .build()
-        );
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager user() {
+//        return new InMemoryUserDetailsManager(
+//                User.withUsername("notahmed")
+//                        .password("{noop}password")
+//                        .authorities("read")
+//                        .build()
+//        );
+//    }
 
 
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        /*
-        * The below is just to allow requests to pass through
-        * By Pass anything
-        * SessionCreationPolicy.STATELESS because it is rest api and no need for session
-        * */
-
-        // never disable csrf while leaving session management open
-
-
-        //oauth2ResourceServer will use jwt and jwt requires decoder in order to work
-
-        return http
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeRequests(
-//                        auth -> auth.anyRequest().authenticated()
-//                )
-//                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//                .sessionManagement(
-//                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
-//                .httpBasic(withDefaults())
-                .build();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
+//        /*
+//        * The below is just to allow requests to pass through
+//        * By Pass anything
+//        * SessionCreationPolicy.STATELESS because it is rest api and no need for session
+//        * */
+//
+//        // never disable csrf while leaving session management open
+//
+//
+//        //oauth2ResourceServer will use jwt and jwt requires decoder in order to work
+//
+//        return http
+////                .csrf(csrf -> csrf.disable())
+////                .authorizeRequests(
+////                        auth -> auth.anyRequest().authenticated()
+////                )
+////                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+////                .sessionManagement(
+////                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+////                )
+////                .httpBasic(withDefaults())
+//                .build();
+//    }
 
 
     /**
