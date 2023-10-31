@@ -18,7 +18,9 @@ The users will be able to post their cats and share cute pics of their cats.
 | Endpoint              | HTTP Method | response                                                |
 |-----------------------|-------------|---------------------------------------------------------|
 | `/`                   | GET         | Get home route with welcome message                     |
-| `/users`              | GET         | responds with users home page                           |
+| `/users`              | GET         | responds with all the users                             |
+| `/users`              | POST        | creates a new user                                      |
+| `/users/:id`          | PUT         | gets single user details using their id                 |
 | `/users/:id`          | PUT         | updates the user details responds with updated user     |
 | `/users/:id`          | DELETE      | deletes an existing user                                |
 | `/users/:userId/cats` | GET         | (no need) responds with all the users cats              |                                        
@@ -32,3 +34,4 @@ The users will be able to post their cats and share cute pics of their cats.
 | `/breeds/:id`         | GET         | responds with the complete details of breed from the id |
 | `/breeds/:id`         | PUT         | updates single cat using the id                         |
 | `/breeds/:id`         | DELETE      | deletes one breed with particular id specified          |
+| `/blog`               | GET         | responses with all the blogs                            |

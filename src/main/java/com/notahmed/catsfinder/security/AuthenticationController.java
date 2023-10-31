@@ -1,5 +1,7 @@
 package com.notahmed.catsfinder.security;
 
+import com.notahmed.catsfinder.security.request.UserRequestDto;
+import com.notahmed.catsfinder.security.response.UserResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +25,14 @@ public class AuthenticationController {
     /**
      *
      */
-    public ResponseEntity<?> signup(@RequestBody UserRequest) {
+    public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto user) {
 
-        return null;
+        // validation should be done an mapper
+        UserResponseDto msg = new UserResponseDto(
+                "user created"
+        );
+
+        return ResponseEntity.ok(msg);
     }
 
 
