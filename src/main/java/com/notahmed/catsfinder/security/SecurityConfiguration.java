@@ -77,6 +77,12 @@ public class SecurityConfiguration {
 
         http
                 .csrf(csrfConfigurer ->csrfConfigurer.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/users/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/v1/").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).formLogin(Customizer.withDefaults());
