@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CatDTOMapper {
+public class CatMapper {
 //    private final List<CatDetails>;
 
     public List <CatDetails> CatDTOMapper(){

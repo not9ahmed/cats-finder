@@ -1,6 +1,7 @@
 package com.notahmed.catsfinder;
 
 import com.notahmed.catsfinder.config.CatFinderProperties;
+import com.notahmed.catsfinder.config.RsaKeyProperties;
 import com.notahmed.catsfinder.dto.CatDetailsNew;
 import com.notahmed.catsfinder.model.User;
 import com.notahmed.catsfinder.repository.CatRepository;
@@ -12,17 +13,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 // adding the props configs
-@EnableConfigurationProperties(CatFinderProperties.class)
+@EnableConfigurationProperties({CatFinderProperties.class, RsaKeyProperties.class})
 
 @SpringBootApplication
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/v0")
 public class Application {
 
 	public static void main(String[] args) {
@@ -33,7 +36,7 @@ public class Application {
 
 
 	@Bean
-	CommandLineRunner commandLineRunner(UserRepository userRepository){
+	CommandLineRunner commandLineRunner(){
 		return args -> {
 
 //			Inserting list of users

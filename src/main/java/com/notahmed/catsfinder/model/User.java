@@ -28,7 +28,7 @@ import java.util.Date;
 ////        Set<Cat> catSet
 //){ }
 
-
+//implements UserDetails
 // using class
 @Table("User")
 public record User (
