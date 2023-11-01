@@ -1,7 +1,7 @@
-package com.notahmed.catsfinder.security;
+package com.notahmed.catsfinder.newStructure.security;
 
-import com.notahmed.catsfinder.security.request.UserRequestDto;
-import com.notahmed.catsfinder.security.response.UserResponseDto;
+import com.notahmed.catsfinder.newStructure.security.request.UserRequestDto;
+import com.notahmed.catsfinder.newStructure.security.response.UserResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
 

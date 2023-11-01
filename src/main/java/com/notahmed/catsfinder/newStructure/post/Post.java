@@ -6,5 +6,5 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("Post")
 public record Post(
 
-        // create schema first
+        // TODO create schema first
 ) { }

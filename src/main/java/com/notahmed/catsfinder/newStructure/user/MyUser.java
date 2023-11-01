@@ -13,7 +13,7 @@ import java.util.Objects;
 
 
 //User is sample implementation in spring boot
-
+// TODO Make the required changes
 // using class
 @Table("User")
 public class MyUser extends User {
@@ -34,6 +34,7 @@ public class MyUser extends User {
         private String profile_image;
 
 
+        // TODO make the necessary changes
         // spring security
         public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
                 super(username, password, authorities);
