@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v0/breeds")
+@RequestMapping("/breeds")
 public class BreedController {
 
 
@@ -24,7 +24,7 @@ public class BreedController {
         breeds.add(new Breed(
                 19L,
                 "himmie",
-                "cure cat",
+                "cute cat",
                 null
         ));
 

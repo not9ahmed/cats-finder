@@ -9,7 +9,10 @@ spring:
   profiles:
     active: dev
 
-
+# adding common url path
+server:
+  servlet:
+    context-path: /api/v0
 
 
 
@@ -72,15 +75,3 @@ management:
 #rsa:
 #  public-key: classpath:certs/public.pem
 #  private-key: classpath:certs/private.pem
-
-
-db:
-#  public-key: classpath:certs/public.pem
-#  private-key: classpath:certs/private.pem
-
-
-  DB_USER:=postgres
-  DB_PASSWORD:=postgres
-  DB_DATABASE_NAME:=cats_db
-  DB_URL=jdbc:postgresql://localhost:5332/cats_db
-  PORT=port:8080

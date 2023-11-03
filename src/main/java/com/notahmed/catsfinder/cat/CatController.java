@@ -12,6 +12,10 @@ import java.util.List;
 @RequestMapping("/cats")
 public class CatController {
 
+
+    // may add home route
+
+
     // get from the original but clean it up
     @GetMapping("/")
     public ResponseEntity<List<Cat>> getAllCats() {

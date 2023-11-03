@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-//@RequestMapping("/api/v0")
 public class Application {
 
 	public static void main(String[] args) {
@@ -25,16 +24,9 @@ public class Application {
 	}
 
 
-
-
 	@Bean
 	CommandLineRunner commandLineRunner(){
 		return args -> {
-
-//			Inserting list of users
-//			userRepository.saveAll()
-
-			// insert data
 			System.out.println("Spring Boot is running...");
 
 		};
