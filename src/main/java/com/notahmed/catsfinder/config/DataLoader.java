@@ -1,9 +1,9 @@
 package com.notahmed.catsfinder.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.notahmed.catsfinder.model.User;
-import com.notahmed.catsfinder.repository.UserRepository;
+//import com.fasterxml.jackson.core.type.TypeReference;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.notahmed.catsfinder.model.User;
+//import com.notahmed.catsfinder.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

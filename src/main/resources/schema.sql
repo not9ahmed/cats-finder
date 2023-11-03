@@ -58,6 +58,13 @@ CREATE TABLE IF NOT EXISTS "Comment" (
 
 
 
+
+-- Create Post Table
+
+
+
+
+
 -- Adding the foreign keys
 -- ALTER TABLE "Cat"
 --     ADD CONSTRAINT cat_owner_id_fk

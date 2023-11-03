@@ -1,7 +1,6 @@
 package com.notahmed.catsfinder.security.request;
 
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 import java.util.Date;

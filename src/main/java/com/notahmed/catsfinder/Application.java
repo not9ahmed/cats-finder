@@ -1,18 +1,11 @@
 package com.notahmed.catsfinder;
 
-import com.notahmed.catsfinder.config.CatFinderProperties;
-import com.notahmed.catsfinder.config.RsaKeyProperties;
-import com.notahmed.catsfinder.dto.CatDetailsNew;
-import com.notahmed.catsfinder.model.User;
-import com.notahmed.catsfinder.repository.CatRepository;
-import com.notahmed.catsfinder.repository.UserRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -75,20 +68,6 @@ public class Application {
 //
 //	}
 
-//	@GetMapping("/")
-//	public HomeData HomePage(){
-//		return new HomeData(
-//				"Homepage",
-//				"Ahmed",
-//				LocalDateTime.now()
-//		);
-//
-//	}
 
-	record HomeData(
-			String title,
-			String CurrentUSer,
-			LocalDateTime dateTime
 
-	){}
 }

@@ -1,8 +1,7 @@
 package com.notahmed.catsfinder.security;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 // configuration must be registered
+// TODO read more about congiguration properties in spring booy
 //@ConfigurationProperties(prefix = "rsaKeys")
 public record RSAKeyProperties (
         String publicKey,
