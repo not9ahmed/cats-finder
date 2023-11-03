@@ -5,7 +5,8 @@ cf:
 
 # adding production database and stuff can be here!
 spring:
-
+  config:
+    import: env-production.properties
   datasource:
     url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
     username: ${PGUSER}

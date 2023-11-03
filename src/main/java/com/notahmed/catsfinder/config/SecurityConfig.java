@@ -23,8 +23,9 @@ import org.springframework.security.web.SecurityFilterChain;
 // static import
 import static org.springframework.security.config.Customizer.*;
 
-@Configuration
-@EnableWebSecurity
+// TODO to be removed
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig {
 
 

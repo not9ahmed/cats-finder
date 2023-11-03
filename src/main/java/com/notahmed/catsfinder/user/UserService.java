@@ -31,11 +31,13 @@ public class UserService implements UserDetailsService {
 
         // I can refactor my codes to use this class instead of repository
         // hard coded user
-        UserDetails userDetails = new User("notahmed",
-                "password",
-                new ArrayList<>()
-        );
+//        UserDetails userDetails = new User("notahmed",
+//                "password",
+//                new ArrayList<>()
+//        );
+//
+//        return userDetails;
 
-        return null;
+        return new User("notahmed","password", new ArrayList<>());
     }
 }

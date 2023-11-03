@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api/v1/auth")
+//@RestController
+//@RequestMapping("/auth")
 public class AuthenticationController {
 
 
     // authenticate create token
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticate() {
-
-        return null;
-
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> authenticate() {
+//
+//        return null;
+//
+//    }
 
     @PostMapping("/signup")
     /**
@@ -27,7 +27,7 @@ public class AuthenticationController {
      */
     public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto user) {
 
-        // validation should be done an mapper
+        // validation should be done on mapper
         UserResponseDto msg = new UserResponseDto(
                 "user created"
         );

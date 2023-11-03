@@ -3,7 +3,7 @@ GET http://localhost:8080/api/breeds
 
 
 ### Get cat by id
-GET http://localhost:8080/api/breeds/1
+GET http://localhost:8080/api/v0/breeds/1
 
 
 ### Create new breeds

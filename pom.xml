@@ -8,7 +8,7 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<!-- Usef for creating the jar files -->
+	<!-- Used for creating the jar files -->
 	<groupId>com.notahmed</groupId>
 	<artifactId>cats-finder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -46,7 +46,7 @@
 		</dependency>
 
 
-<!-- to handle or passing props securely -->
+		<!-- dependency to handle passing props securely -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -82,7 +82,7 @@
 			<version>0.12.3</version>
 			<scope>runtime</scope>
 		</dependency>
-<!-- end of lines -->
+		<!-- end of lines -->
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>

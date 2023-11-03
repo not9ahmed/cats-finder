@@ -14,6 +14,7 @@ import java.util.List;
 
 
 // This Command Line class will run only with the dev profile
+// TODO add the require profile
 @Profile("production")
 @Component
 public class DataLoader implements CommandLineRunner {

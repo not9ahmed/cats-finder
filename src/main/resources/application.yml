@@ -44,6 +44,7 @@ spring:
 #  port: 8080
 
 
+# this is used in CatFinderProperties class
 cf:
   welcome-message: Welcome to cat finder
   about: this api is just a sample project using spring boot
@@ -51,7 +52,7 @@ cf:
 
 # adding dev database and stuff can be here!
 
-
+# for dev only
 management:
   endpoints:
     web:
@@ -71,3 +72,15 @@ management:
 #rsa:
 #  public-key: classpath:certs/public.pem
 #  private-key: classpath:certs/private.pem
+
+
+db:
+#  public-key: classpath:certs/public.pem
+#  private-key: classpath:certs/private.pem
+
+
+  DB_USER:=postgres
+  DB_PASSWORD:=postgres
+  DB_DATABASE_NAME:=cats_db
+  DB_URL=jdbc:postgresql://localhost:5332/cats_db
+  PORT=port:8080

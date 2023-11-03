@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/breeds")
+@RequestMapping("/api/v0/breeds")
 public class BreedController {
 
 
@@ -20,6 +20,13 @@ public class BreedController {
     public ResponseEntity<List<Breed>> getAllBreeds() {
 
         List<Breed> breeds = new ArrayList<>();
+
+        breeds.add(new Breed(
+                19L,
+                "himmie",
+                "cure cat",
+                null
+        ));
 
         return ResponseEntity.ok(breeds);
     }

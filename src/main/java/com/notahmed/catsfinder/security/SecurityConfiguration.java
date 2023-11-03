@@ -1,6 +1,7 @@
 package com.notahmed.catsfinder.security;
 
 import com.notahmed.catsfinder.user.MyUserDetailsService;
+import com.notahmed.catsfinder.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,8 +10,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -23,11 +26,11 @@ public class SecurityConfiguration {
 
     // user details service here
     // always add the service in the MyUserDetailsService so that spring security find its
-    private final MyUserDetailsService myuserDetailsService;
+    private final UserService userService;
 
-    public SecurityConfiguration(JwtService jwtService, MyUserDetailsService myuserDetailsService) {
+    public SecurityConfiguration(JwtService jwtService, UserService userService) {
         this.jwtService = jwtService;
-        this.myuserDetailsService = myuserDetailsService;
+        this.userService = userService;
     }
 
     // steps
@@ -40,14 +43,39 @@ public class SecurityConfiguration {
 
 
     @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        // add filter
+
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/api/v0/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/api/v0/users/**").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers("/**").permitAll()
+                                .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authenticationProvider(daoAuthenticationProvider())
+                .formLogin(Customizer.withDefaults());
+
+
+        return http.build();
+    }
+
+
+
+
+    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 
-        daoAuthenticationProvider.setUserDetailsService(myuserDetailsService);
-
+        daoAuthenticationProvider.setUserDetailsService(userService);
         // gets from the bean below
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-
 
         return daoAuthenticationProvider;
     }
@@ -56,7 +84,7 @@ public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder () {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
 
@@ -71,24 +99,5 @@ public class SecurityConfiguration {
 
 
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        // add filter
-
-        http
-                .csrf(csrfConfigurer ->csrfConfigurer.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/users/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/api/v1/").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).formLogin(Customizer.withDefaults());
-
-
-        return http.build();
-    }
 }
