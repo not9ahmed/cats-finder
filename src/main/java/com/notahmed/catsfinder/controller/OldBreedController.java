@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-@RestController
-@RequestMapping("/api/breeds")
-@CrossOrigin(origins = "http://localhost:3000")
-public class BreedController {
+//@RestController
+//@RequestMapping("/api/breeds")
+//@CrossOrigin(origins = "http://localhost:3000")
+public class OldBreedController {
 
     // Add the breedrepository
     private final BreedRepository repository;
 
 
     // add the constructor with dependency injection
-    public BreedController(BreedRepository repository){
+    public OldBreedController(BreedRepository repository){
         this.repository = repository;
     }
 

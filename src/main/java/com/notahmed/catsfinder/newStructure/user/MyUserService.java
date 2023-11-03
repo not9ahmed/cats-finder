@@ -1,6 +1,5 @@
 package com.notahmed.catsfinder.newStructure.user;
 
-import com.notahmed.catsfinder.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +22,7 @@ public class MyUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         //
-        User user = userRepository.findUserByUsername(username);
+//        User user = userRepository.findUserByUsername(username);
 
         return null;
     }

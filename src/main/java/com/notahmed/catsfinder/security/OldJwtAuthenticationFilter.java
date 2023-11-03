@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 @Component
 @Configuration
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class OldJwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 

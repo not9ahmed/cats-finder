@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:3000")
-public class UserController {
+public class OldUserController {
 
 
     // using java jdbc from the repository
@@ -26,7 +26,7 @@ public class UserController {
     private final UserMapper userMapper;
 
     // add the constructor
-    public UserController(UserRepository userRepository, UserMapper userMapper) {
+    public OldUserController(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 // adding the props configs
-@EnableConfigurationProperties({CatFinderProperties.class, RsaKeyProperties.class})
+//@EnableConfigurationProperties({CatFinderProperties.class, RsaKeyProperties.class})
 
 @SpringBootApplication
 @RestController

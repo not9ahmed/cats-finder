@@ -29,11 +29,11 @@ public class SecurityConfig {
 
 
     // having the keypair as instance
-    private final RsaKeyProperties rsaKeys;
-
-    public SecurityConfig(RsaKeyProperties rsaKeys) {
-        this.rsaKeys = rsaKeys;
-    }
+//    private final RsaKeyProperties rsaKeys;
+//
+//    public SecurityConfig(RsaKeyProperties rsaKeys) {
+//        this.rsaKeys = rsaKeys;
+//    }
 
 
     // noop will hash the password

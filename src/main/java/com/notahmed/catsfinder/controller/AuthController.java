@@ -16,28 +16,28 @@ import java.security.Principal;
 public class AuthController {
 
     // create new instance of logger slf4j
-    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
-
-
-    // dependency injection
-    private final TokenService tokenService;
-
-    public AuthController(TokenService tokenService) {
-        this.tokenService = tokenService;
-    }
-
-
-
-    @PostMapping("/token")
-    private String token(Authentication authentication) {
-
-        LOG.debug("Token Request from user '{}'", authentication.getName());
-
-        String token = tokenService.generateToken(authentication);
-
-        LOG.debug("Token Granted {}", token);
-
-
-        return token;
-    }
+//    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+//
+//
+//    // dependency injection
+//    private final TokenService tokenService;
+//
+//    public AuthController(TokenService tokenService) {
+//        this.tokenService = tokenService;
+//    }
+//
+//
+//
+//    @PostMapping("/token")
+//    private String token(Authentication authentication) {
+//
+//        LOG.debug("Token Request from user '{}'", authentication.getName());
+//
+//        String token = tokenService.generateToken(authentication);
+//
+//        LOG.debug("Token Granted {}", token);
+//
+//
+//        return token;
+//    }
 }

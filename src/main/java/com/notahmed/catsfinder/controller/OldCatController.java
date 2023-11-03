@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cats")
 @CrossOrigin(origins = "http://localhost:3000")
-public class CatController {
+public class OldCatController {
 
     // Add Spring Data JDBC Repository which is CatRepository which is by default contains all the crud function
     private final CatRepository catRepository;
@@ -29,7 +29,7 @@ public class CatController {
 
 
     // Dependency Injection of the repository here with constructor
-    public CatController(CatRepository catRepository, UserRepository userRepository, BreedRepository breedRepository) {
+    public OldCatController(CatRepository catRepository, UserRepository userRepository, BreedRepository breedRepository) {
         this.catRepository = catRepository;
         this.userRepository = userRepository;
         this.breedRepository = breedRepository;

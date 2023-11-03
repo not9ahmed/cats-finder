@@ -68,6 +68,6 @@ management:
 
 # once I build the project I can access the properties
 # accessing the private and public key
-rsa:
-  public-key: classpath:certs/public.pem
-  private-key: classpath:certs/private.pem
+#rsa:
+#  public-key: classpath:certs/public.pem
+#  private-key: classpath:certs/private.pem

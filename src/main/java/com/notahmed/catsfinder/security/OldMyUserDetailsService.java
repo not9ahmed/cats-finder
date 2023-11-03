@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class OldMyUserDetailsService implements UserDetailsService {
 
     // fetches data from DB
     // or from the repository
     // it is also safer this way
     private final UserRepository userRepository;
 
-    public MyUserDetailsService(UserRepository userRepository) {
+    public OldMyUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

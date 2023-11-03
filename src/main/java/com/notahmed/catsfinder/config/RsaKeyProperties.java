@@ -10,7 +10,7 @@ import java.security.interfaces.RSAPublicKey;
  * Then must add the reference inside the main class
  */
 
-@ConfigurationProperties(prefix = "rsa")
+//@ConfigurationProperties(prefix = "rsa")
 public record RsaKeyProperties(
         RSAPublicKey publicKey,
         RSAPrivateKey privateKey)
