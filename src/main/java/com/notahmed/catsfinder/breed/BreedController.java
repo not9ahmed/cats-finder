@@ -1,10 +1,8 @@
 package com.notahmed.catsfinder.breed;
 
+import com.notahmed.catsfinder.breed.response.BreedResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,20 @@ import java.util.List;
 public class BreedController {
 
 
+    private final BreedService breedService;
+
+    public BreedController(BreedService breedService) {
+        this.breedService = breedService;
+    }
+
+
     // what happens to route /breeds ?
+    @GetMapping("")
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok("Home Route");
+    }
+
+
 
     @GetMapping("/")
     public ResponseEntity<List<Breed>> getAllBreeds() {
@@ -32,11 +43,22 @@ public class BreedController {
     }
 
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BreedResponse> findBreedById(@RequestParam Long id) {
+
+        ResponseEntity<BreedResponse> breed = breedService.findById(id);
+
+        return breed;
+    }
+
+
     @PostMapping("/")
     public ResponseEntity<String> createBreed() {
 
         return ResponseEntity.ok("Successfully created");
     }
+
 
 
 }

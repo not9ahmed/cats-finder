@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.util.ArrayList;
 
 // same as before
+// Using class for the models is better
 // TODO I can find more details about breed such as
 //  -- origin country
 // -- history
