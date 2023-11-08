@@ -6,37 +6,20 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 
-@Table("Comment")
-public record Comment(
-        @Id
-        Long id,
-        String name,
-        String content,
-        LocalDateTime publishedOn,
-        LocalDateTime updatedOn,
-        @Transient
-        Cat cat
-) {
-}
-
-/*
-old code and it did not have repository
+//@Table("Comment")
+//public record Comment(
+//        @Id
+//        Long id,
+//        String name,
+//        String content,
+//        LocalDateTime publishedOn,
+//        LocalDateTime updatedOn,
+//        @Transient
+//        Cat cat
+//) { }
 
 
-package com.notahmed.catsfinder.model;
 
-
-        import org.springframework.data.annotation.Id;
-        import org.springframework.data.annotation.Transient;
-        import org.springframework.data.relational.core.mapping.Table;
-
-        import java.time.LocalDateTime;
-
-/*
- * Comment table cannot live on its on so it will be treated as main entity
- * */
-
-/*
 @Table("Comment")
 public class Comment {
 
@@ -109,4 +92,3 @@ public class Comment {
                 '}';
     }
 }
-*/
