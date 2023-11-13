@@ -26,7 +26,7 @@ public record Breed (
 ){}
 
 
-// Updates Breed
+// Updated Breed
 /*
 @Table("Breed")
 public record Breed (

@@ -9,6 +9,9 @@ import java.util.Collection;
 // will be the user entity
 // I will create my own and extend UserDetails as it's more logical
 public class User implements UserDetails {
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

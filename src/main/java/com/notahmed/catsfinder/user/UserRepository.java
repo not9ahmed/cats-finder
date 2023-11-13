@@ -6,9 +6,17 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends ListCrudRepository<User, Long> {
 
+    Optional<User> findUserByUsername(String username);
+
+}
+
+
+
+/* Old Project Requests */
 
     //Query Derivation
 //    User findUserByUsername(String username);
@@ -98,5 +106,3 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
 //            """)
 //    List<UserCatsCommentsJoinedDto> findUserCatsAndComments(@Param("userId") Long userId);
 
-
-}
