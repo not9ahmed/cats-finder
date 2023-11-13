@@ -71,7 +71,7 @@ public class BreedService {
     }
 
 
-    private ResponseEntity<BreedResponse> update(BreedRequest breedRequest) {
+    public ResponseEntity<BreedResponse> update(BreedRequest breedRequest) {
 
         // check if the breed request is valid
 
@@ -82,6 +82,17 @@ public class BreedService {
 
         return ResponseEntity.ok(null);
     }
+
+
+
+    public ResponseEntity<List<BreedResponse>> searchBreeds(String q) {
+
+        breedRepository.findAllByNameContainingIgnoreCaseAndDescriptionContainingIgnoreCase(q, q);
+
+
+        return ResponseEntity.ok(null);
+    }
+
 
 
 }
