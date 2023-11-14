@@ -44,6 +44,16 @@ public class CatController {
     }
 
 
+    public ResponseEntity<?> findCatById(@RequestParam Long id) {
+
+        ResponseEntity<?> cat = catService.findById(id);
+
+        return null;
+    }
+
+
+
+
     /**
      * Controller to save cat into database
      * @param cat
