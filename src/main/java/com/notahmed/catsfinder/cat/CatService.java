@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,14 +78,13 @@ public class CatService {
     }
 
 
-    public ResponseEntity<CatResponse> findCatByBreedId(Long id) {
+    public ResponseEntity<List<CatResponse>> findCatsByBreedId(Long breedId) {
 
 
-//        AggregateReference<Breed, Long> breediId = id;
+        AggregateReference<Breed, Long> breedAggRefId = AggregateReference.to(breedId);
 
 
-//        catRepository.findAllByBreedId(id);
-
+        List<Cat> cats = catRepository.findAllByBreedId(breedAggRefId);
 
 
         ResponseEntity.ok(null);
@@ -92,5 +92,16 @@ public class CatService {
         return null;
     }
 
+
+    public ResponseEntity<List<CatResponse>> findCatsByBirthDate(Date dateStart, Date dateEnd) {
+
+        List<Cat> cats = catRepository.findAllByBirth_dateBetween(dateStart, dateEnd);
+
+
+        ResponseEntity.ok(null);
+
+
+        return null;
+    }
 
 }
