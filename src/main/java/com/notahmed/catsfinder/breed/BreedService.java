@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+// TODO: Call the repository class in this class and handle certain actions before calling the repo such as
+// 1- expected inputs and output
+// 2- not found id, or invalid params passed
+// 3- Map the Breed class to a response entity
+// 4- provide the correct response status code
+// 5- generate unit tests
 @Service
 public class BreedService {
 

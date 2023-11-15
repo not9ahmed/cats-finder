@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// TODO: Create more interfaces which are sensible in the project
 @Repository
 public interface BreedRepository extends ListCrudRepository<Breed,Long> {
 

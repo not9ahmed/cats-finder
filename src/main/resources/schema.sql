@@ -84,3 +84,6 @@ CREATE TABLE IF NOT EXISTS "Comment" (
 --     ADD CONSTRAINT comment_cat_fk
 --         FOREIGN KEY (cat)
 --             REFERENCES "Cat"(id);
+
+
+-- TODO: Create the new tables and complete the ERD
