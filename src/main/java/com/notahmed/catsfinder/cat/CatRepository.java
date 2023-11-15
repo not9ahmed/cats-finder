@@ -20,4 +20,6 @@ public interface CatRepository extends ListCrudRepository<Cat, Long > {
 
     List<Cat> findAllByBirth_dateBetween(Date dateStart, Date dateEnd);
 
+
+
 }

@@ -3,6 +3,7 @@ package com.notahmed.catsfinder.cat;
 import com.notahmed.catsfinder.breed.Breed;
 import com.notahmed.catsfinder.cat.request.CatRequest;
 import com.notahmed.catsfinder.cat.response.CatResponse;
+import com.notahmed.catsfinder.user.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.http.ResponseEntity;
@@ -91,6 +92,23 @@ public class CatService {
 
         return null;
     }
+
+
+    public ResponseEntity<List<CatResponse>> findCatsByOwnerID(Long ownerId) {
+
+        AggregateReference<User, Long> ownerAggRefId = AggregateReference.to(ownerId);
+
+
+        List<Cat> cats = catRepository.findAllByOwnerId(ownerAggRefId);
+
+        // do the mapping
+
+
+        ResponseEntity.ok(null);
+
+        return null;
+    }
+
 
 
     public ResponseEntity<List<CatResponse>> findCatsByBirthDate(Date dateStart, Date dateEnd) {
