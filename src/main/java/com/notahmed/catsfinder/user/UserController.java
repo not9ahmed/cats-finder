@@ -19,10 +19,10 @@ public class UserController {
     }
 
 
-    @GetMapping("")
-    public ResponseEntity<String> home()  {
-        return ResponseEntity.ok("Home Route");
-    }
+//    @GetMapping("")
+//    public ResponseEntity<String> home()  {
+//        return ResponseEntity.ok("Home Route");
+//    }
 
 
     @GetMapping("/")

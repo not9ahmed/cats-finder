@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 // I already have it inside the security but here it's more logical
-@Service
+//@Service
 public class MyUserDetailsService implements UserDetailsService {
 
     // fetches data from DB
     // or from the repository
     // it is also safer this way
-    private final UserRepository userRepository;
-
-    public MyUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-
+//    private final UserRepository userRepository;
+//
+//    public MyUserDetailsService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+//
+//
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

@@ -18,7 +18,7 @@ public interface CatRepository extends ListCrudRepository<Cat, Long > {
     List<Cat> findAllByOwnerId(AggregateReference<User, Long> ownerId);
 
 
-    List<Cat> findAllByBirth_dateBetween(Date dateStart, Date dateEnd);
+    List<Cat> findAllByBirthDateBetween(Date dateStart, Date dateEnd);
 
 
 

@@ -113,7 +113,7 @@ public class CatService {
 
     public ResponseEntity<List<CatResponse>> findCatsByBirthDate(Date dateStart, Date dateEnd) {
 
-        List<Cat> cats = catRepository.findAllByBirth_dateBetween(dateStart, dateEnd);
+        List<Cat> cats = catRepository.findAllByBirthDateBetween(dateStart, dateEnd);
 
 
         ResponseEntity.ok(null);

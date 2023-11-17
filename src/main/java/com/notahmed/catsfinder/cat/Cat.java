@@ -55,7 +55,7 @@ public class Cat {
         String name;
         AggregateReference<Breed, Long> breedId;
         AggregateReference<User, Long> ownerId;
-        Date birth_date;
+        Date birthDate;
         ArrayList<String> images;
         ArrayList<String> toys;
 
@@ -79,12 +79,12 @@ public class Cat {
         }
 
 
-        public Cat(Long id, String name, AggregateReference<Breed, Long> breedId, AggregateReference<User, Long> ownerId, Date birth_date, ArrayList<String> images, ArrayList<String> toys, List<Comment> comments) {
+        public Cat(Long id, String name, AggregateReference<Breed, Long> breedId, AggregateReference<User, Long> ownerId, Date birthDate, ArrayList<String> images, ArrayList<String> toys, List<Comment> comments) {
                 this.id = id;
                 this.name = name;
                 this.breedId = breedId;
                 this.ownerId = ownerId;
-                this.birth_date = birth_date;
+                this.birthDate = birthDate;
                 this.images = images;
                 this.toys = toys;
                 this.comments = comments;
@@ -123,12 +123,12 @@ public class Cat {
                 this.ownerId = ownerId;
         }
 
-        public Date getBirth_date() {
-                return birth_date;
+        public Date getBirthDate() {
+                return birthDate;
         }
 
-        public void setBirth_date(Date birth_date) {
-                this.birth_date = birth_date;
+        public void setBirthDate(Date birthDate) {
+                this.birthDate = birthDate;
         }
 
         public ArrayList<String> getImages() {
@@ -161,12 +161,12 @@ public class Cat {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 Cat cat = (Cat) o;
-                return Objects.equals(id, cat.id) && Objects.equals(name, cat.name) && Objects.equals(breedId, cat.breedId) && Objects.equals(ownerId, cat.ownerId) && Objects.equals(birth_date, cat.birth_date) && Objects.equals(images, cat.images) && Objects.equals(toys, cat.toys) && Objects.equals(comments, cat.comments);
+                return Objects.equals(id, cat.id) && Objects.equals(name, cat.name) && Objects.equals(breedId, cat.breedId) && Objects.equals(ownerId, cat.ownerId) && Objects.equals(birthDate, cat.birthDate) && Objects.equals(images, cat.images) && Objects.equals(toys, cat.toys) && Objects.equals(comments, cat.comments);
         }
 
         @Override
         public int hashCode() {
-                return Objects.hash(id, name, breedId, ownerId, birth_date, images, toys, comments);
+                return Objects.hash(id, name, breedId, ownerId, birthDate, images, toys, comments);
         }
 
         @Override
@@ -176,7 +176,7 @@ public class Cat {
                         ", name='" + name + '\'' +
                         ", breedId=" + breedId +
                         ", ownerId=" + ownerId +
-                        ", birth_date=" + birth_date +
+                        ", birthDate=" + birthDate +
                         ", images=" + images +
                         ", toys=" + toys +
                         ", comments=" + comments +
