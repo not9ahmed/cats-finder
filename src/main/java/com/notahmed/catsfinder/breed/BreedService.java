@@ -6,6 +6,7 @@ import org.springframework.boot.context.config.ConfigDataResourceNotFoundExcepti
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,11 +79,27 @@ public class BreedService {
     }
 
 
-    public ResponseEntity<BreedResponse> updateById(BreedRequest breedRequest) {
+    public ResponseEntity<BreedResponse> update(Long id, BreedRequest breedRequest) {
 
         // check if the breed request is valid
 
+
         // update in the db
+        // check if it exists
+        boolean isBreedFound = breedRepository.existsById(id);
+
+        if (!isBreedFound) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Breed breed = new Breed(
+                id,
+                breedRequest.name(),
+                breedRequest.description(),
+                breedRequest.images()
+        );
+
+        breedRepository.save(breed);
 
 
 //        breedRepository.save(null);

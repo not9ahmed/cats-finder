@@ -67,16 +67,22 @@ public class BreedController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateBreedById(@PathVariable Long id, @RequestBody BreedRequest breed) {
+    public ResponseEntity<BreedResponse> updateBreedById(@PathVariable Long id, @RequestBody BreedRequest breed) {
 
         // TODO: call service to update the breed
+        ResponseEntity<BreedResponse> updateResponse = breedService.update(id, breed);
 
-        return ResponseEntity.ok("Successfully updated");
+        return updateResponse;
+
+//        return ResponseEntity.ok(updateResponse);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBreedById(@PathVariable Long id) {
+
+
+        ResponseEntity<BreedResponse> breedResponseResponseEntity = breedService.deleteById(id);
 
         return ResponseEntity.ok("Successfully deleted");
     }
@@ -97,10 +103,17 @@ public class BreedController {
 
 
     @GetMapping("")
-    public ResponseEntity<List<BreedResponse>> searchBreedsWithFields(@RequestParam(required = false) String name,
-                                                                      @RequestParam(required = false) String origin) {
+    public ResponseEntity<List<BreedResponse>> searchBreedsWithFields
+            (@RequestParam(required = false) String name,
+             @RequestParam(required = false) String origin) {
+
 
         // call the service to search based on the provided params
+
+//        if (!name.isEmpty() && !origin.isEmpty()){
+//
+//        }
+
 
         // get the breeds list
 
