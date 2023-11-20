@@ -98,20 +98,27 @@ CREATE TABLE IF NOT EXISTS "Comment" (
 -- ALTER TABLE "Cat" DROP CONSTRAINT cat_breed_id_fk
 -- ALTER TABLE "Comment" DROP CONSTRAINT comment_cat_fk
 
+
+
+-- Should Match Spring Security --
 -- Create User Table --
 CREATE TABLE IF NOT EXISTS "User" (
-                                      id SERIAL PRIMARY KEY,
-                                      username VARCHAR(20) UNIQUE,
-                                      password VARCHAR(50),
-                                      first_name VARCHAR(50),
-                                      last_name VARCHAR(50),
-                                      mobile VARCHAR(50),
-                                      gender CHAR(1) CHECK(gender IN ('F', 'M')),
-                                      birth_date DATE,
-                                      details_updated TIMESTAMP,
-                                      user_role CHAR(1) CHECK(user_role IN('A', 'U')),
-                                      profile_image VARCHAR(200)
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(20) UNIQUE,
+    password VARCHAR(50),
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    mobile VARCHAR(50),
+    gender CHAR(1) CHECK(gender IN ('F', 'M')),
+    birth_date DATE,
+    details_updated TIMESTAMP,
+    user_role CHAR(1) CHECK(user_role IN('A', 'U')),
+    profile_image VARCHAR(200)
 );
+
+
+
+
 
 
 -- Create Cat Table --
