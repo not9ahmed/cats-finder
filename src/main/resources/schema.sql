@@ -112,24 +112,39 @@ CREATE TABLE IF NOT EXISTS "User" (
     gender CHAR(1) CHECK(gender IN ('F', 'M')),
     birth_date DATE,
     details_updated TIMESTAMP,
+
+--     change to different table
     user_role CHAR(1) CHECK(user_role IN('A', 'U')),
-    profile_image VARCHAR(200)
+    profile_image VARCHAR(200),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
 );
 
 
+
+-- Create User_Role Table --
+-- Follow Spring Security
+CREATE TABLE IF NOT EXISTS "Role" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
+);
 
 
 
 
 -- Create Cat Table --
 CREATE TABLE IF NOT EXISTS "Cat" (
-     id SERIAL PRIMARY KEY,
-     name VARCHAR(20) NOT NULL,
-     breed_id INTEGER NOT NULL,
-     owner_id INTEGER NOT NULL,
-     birth_date DATE,
-     images VARCHAR(200)[],
-     toys VARCHAR(30)[]
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    breed_id INTEGER NOT NULL,
+    owner_id INTEGER NOT NULL,
+    birth_date DATE,
+    images VARCHAR(200)[],
+    toys VARCHAR(30)[],
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
 );
 
 
@@ -138,7 +153,9 @@ CREATE TABLE IF NOT EXISTS "Breed" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
     description TEXT,
-    images VARCHAR(200)[]
+    images VARCHAR(200)[],
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
 );
 
 
@@ -150,8 +167,8 @@ CREATE TABLE IF NOT EXISTS "Comment" (
      cat INTEGER NOT NULL,
      name VARCHAR(30) NOT NULL,
      content TEXT NOT NULL,
-     published_on TIMESTAMP NOT NULL,
-     updated_on TIMESTAMP
+     created_at TIMESTAMP NOT NULL,
+     updated_at TIMESTAMP
 );
 
 
@@ -162,8 +179,8 @@ CREATE TABLE IF NOT EXISTS "Post" (
       id SERIAL PRIMARY KEY,
       title VARCHAR(50),
       content TEXT,
-      created_on TIMESTAMP NOT NULL,
-      updated_on TIMESTAMP
+      created_at TIMESTAMP NOT NULL,
+      updated_at TIMESTAMP
 );
 
 
