@@ -1,5 +1,6 @@
 package com.notahmed.catsfinder.user;
 
+import com.notahmed.catsfinder.user.request.UserRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -98,5 +99,19 @@ public class UserService implements UserDetailsService {
 
 
 
+    public ResponseEntity<com.notahmed.catsfinder.user.User> updateUser(Long id, UserRequest userRequest) {
+
+        // check user if it exists in the database
+        boolean isUserExist = userRepository.existsById(id);
+
+        if(!isUserExist) {
+            return ResponseEntity.notFound().build();
+        }
+
+        com.notahmed.catsfinder.user.User user = userRepository.findById(id).orElse(null);
+
+
+        return ResponseEntity.ok(user);
+    }
 
 }

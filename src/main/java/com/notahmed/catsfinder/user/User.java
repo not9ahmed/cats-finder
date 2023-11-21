@@ -1,23 +1,43 @@
 package com.notahmed.catsfinder.user;
 
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
 // TODO make this class use UserDetails
 // will be the user entity
 // I will create my own and extend UserDetails as it's more logical
+@Table("User")
 public class User implements UserDetails {
 
-
+    // most required fields
     private String username;
     private String password;
     private Set<GrantedAuthority> authorities;
 
+/*
+    @NotBlank
+    private String username;
+    @NotBlank
+    private String password;
+    private String first_name;
+    private String last_name;
+    private String mobile;
+    private Character gender;
+    private Date birth_date;
+    private LocalDateTime details_updated;
+    private Character user_role;
+    private String profile_image;
 
+
+ */
     public void setUsername(String username) {
         this.username = username;
     }
